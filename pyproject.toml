@@ -1,7 +1,17 @@
 [project]
 name = "robotpuzzle"
 version = "0.1.0"
-description = "Add your description here"
+description = "Solve Exploding Robot Puzzle"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "rich>=13.9.4",
+    "textual>=0.86.3",
+]
+
+[dependency-groups]
+dev = [
+    "black>=24.10.0",
+    "ruff>=0.7.4",
+    "ruff-lsp>=0.0.58",
+]
