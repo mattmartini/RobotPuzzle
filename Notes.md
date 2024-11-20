@@ -13,7 +13,10 @@ read buffers, take action explode or write neigbhoors
 
 Robot output:
 
-       023    # red for inactive, Green for active
-      1 0 _
-    1<-- -->1
-
+```
+╭─────────╮
+│   003   │ # red for inactive, Green for active
+│  1 1 _  │
+│_<-- -->1│
+╰─────────╯
+```
