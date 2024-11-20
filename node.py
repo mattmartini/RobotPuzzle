@@ -5,7 +5,7 @@ __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.0"
 
 from rich import print
-from rich import inspect
+# from rich import inspect
 
 
 class Node:
@@ -31,7 +31,8 @@ class Node:
     def __str__(self):
         """Print the Node"""
         string = "╭────────────────╮\n"
-        string += f"│       {self.id:03d}      │\n"
+        string += f"│{self.prev.id:03d}  {('-', '+')[self.active]} "
+        string += f"{self.id:03d} {('-', '+')[self.active]} {self.next.id:03d}│\n"
 
         string += f"│{(self.laction, '_')[self.laction is None]}<--"
         string += f"  {(self.lbuffer, '_')[self.lbuffer is None]} "
@@ -39,7 +40,7 @@ class Node:
         string += f"{(self.rbuffer, '_')[self.rbuffer is None]} "
         string += f"-->{(self.raction, '_')[self.raction is None]}│\n"
 
-        string += "╰────────────────╯\n"
+        string += "╰────────────────╯"
         # string += print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
 
         return string
@@ -56,13 +57,12 @@ def test():
     """Node test"""
     print("-------------------------------------------------------------------")
     robotA = Node()
-    print(repr(robotA))
     robotA.data = 1
     robotA.raction = 1
     robotA.lbuffer = 1
-    print(robotA)
-    print(repr(robotA))
-    print(locals())
+    # print(robotA)
+    # print(repr(robotA))
+    # print(locals())
 
     robotB = Node()
     robotB.prev = robotA
@@ -70,11 +70,12 @@ def test():
     robotA.prev = robotB
     robotA.next = robotB
     robotB.data = 1
+    robotB.active = 1
     robotB.raction = 1
     robotB.lbuffer = 0
-    print(robotB)
-    print(repr(robotB))
-    print(locals())
+    # print(robotB)
+    # print(repr(robotB))
+    # print(locals())
 
     robotC = Node()
     robotC.prev = robotB
@@ -84,10 +85,12 @@ def test():
     robotC.data = 0
     robotC.raction = 0
     robotC.lbuffer = 1
+    print(robotA)
+    print(robotB)
     print(robotC)
-    print(repr(robotC))
-    print(locals())
-    inspect(robotA, methods=True)
+    # print(repr(robotC))
+    # print(locals())
+    # inspect(robotA, methods=True)
 
 
 if __name__ == "__main__":
