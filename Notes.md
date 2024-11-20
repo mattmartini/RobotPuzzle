@@ -14,9 +14,8 @@ read buffers, take action explode or write neigbhoors
 Robot output:
 
 ```
-╭─────────╮
-│   003   │ # red for inactive, Green for active
-│  1 1 _  │
-│_<-- -->1│
-╰─────────╯
+╭────────────────╮
+│001  - 002 - 000│    prev_node  active_flag id active_flag  next_node
+│_<--  1 0 _ -->0│    L_sent    l_rvc    register   r_rvc      R_sent 
+╰────────────────╯
 ```
