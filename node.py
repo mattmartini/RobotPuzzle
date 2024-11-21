@@ -2,7 +2,7 @@
 
 __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
-__version__ = "1.0.0"
+__version__ = "1.0.4"
 
 from rich import print
 # from rich import inspect
@@ -85,12 +85,13 @@ def test():
     robotC.data = 0
     robotC.raction = 0
     robotC.lbuffer = 1
-    print(robotA)
-    print(robotB)
-    print(robotC)
     # print(repr(robotC))
     # print(locals())
     # inspect(robotA, methods=True)
+
+    print(robotA)
+    print(robotB)
+    print(robotC)
 
 
 if __name__ == "__main__":
