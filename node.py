@@ -63,6 +63,14 @@ class Node:
         self.in_buffer_n = None
         return cur_buffers
 
+    def activate(self):
+        """Activate Node"""
+        self.active = 1
+
+    def deactivate(self):
+        """Deactivate Node"""
+        self.active = 0
+
     def action(self):
         """Action taken this tic tock"""
         pass
