@@ -20,10 +20,10 @@ class Node:
         self.data = data
         self.prev = self
         self.next = self
-        self.rbuffer = None
-        self.lbuffer = None
-        self.raction = None
-        self.laction = None
+        self.in_buffer_p = None
+        self.in_buffer_n = None
+        self.out_buffer_p = None
+        self.out_buffer_n = None
 
     def __repr__(self):
         return f"Node({self.id}, {self.active}, {self.data}, {self.prev.id}, {self.next.id})"
@@ -34,11 +34,11 @@ class Node:
         string += f"│{self.prev.id:03d}  {('-', '+')[self.active]} "
         string += f"{self.id:03d} {('-', '+')[self.active]} {self.next.id:03d}│\n"
 
-        string += f"│{(self.laction, '_')[self.laction is None]}<--"
-        string += f"  {(self.lbuffer, '_')[self.lbuffer is None]} "
+        string += f"│{(self.out_buffer_p, '_')[self.out_buffer_p is None]}<--"
+        string += f"  {(self.in_buffer_p, '_')[self.in_buffer_p is None]} "
         string += f"{(self.data, '_')[self.data is None]} "
-        string += f"{(self.rbuffer, '_')[self.rbuffer is None]} "
-        string += f"-->{(self.raction, '_')[self.raction is None]}│\n"
+        string += f"{(self.in_buffer_n, '_')[self.in_buffer_n is None]} "
+        string += f"-->{(self.out_buffer_n, '_')[self.out_buffer_n is None]}│\n"
 
         string += "╰────────────────╯"
         # string += print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
