@@ -5,7 +5,7 @@ __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.4"
 
 from rich import print
-# from rich import inspect
+from rich import inspect
 
 
 class Node:
@@ -101,43 +101,62 @@ class Node:
 
 def test():
     """Node test"""
+    Node.count = 0
     print("-------------------------------------------------------------------")
-    robotA = Node()
-    robotA.data = 1
-    robotA.raction = 1
-    robotA.lbuffer = 1
-    # print(robotA)
-    # print(repr(robotA))
-    # print(locals())
+    print("-------------------------------------------------------------------")
 
+    robotA = Node()
     robotB = Node()
     robotB.prev = robotA
     robotB.next = robotA
     robotA.prev = robotB
     robotA.next = robotB
-    robotB.data = 1
-    robotB.active = 1
-    robotB.raction = 1
-    robotB.lbuffer = 0
-    # print(robotB)
-    # print(repr(robotB))
-    # print(locals())
-
     robotC = Node()
     robotC.prev = robotB
     robotC.next = robotA
     robotA.prev = robotC
     robotB.next = robotC
-    robotC.data = 0
-    robotC.raction = 0
-    robotC.lbuffer = 1
     # print(repr(robotC))
     # print(locals())
     # inspect(robotA, methods=True)
+    print("create_three_robots")
 
+    def show_robots():
     print(robotA)
     print(robotB)
     print(robotC)
+
+    def time_click(time=0):
+        print(f"-  tic - {time:02d} -----------------------------------")
+        robotA.take_action("tic")
+        robotB.take_action("tic")
+        robotC.take_action("tic")
+        print(f"- tock - {time:02d} -----------------------------------")
+        robotA.take_action("tock")
+        robotB.take_action("tock")
+        robotC.take_action("tock")
+        show_robots()
+
+    time_click(0)
+
+    robotA.data = 1
+    robotB.data = 1
+    robotC.data = 0
+    robotA.in_buffer_p = 1
+    robotB.out_buffer_p = 1
+    print(inspect(robotB))
+    robotB.activate()
+    time_click(1)
+
+    robotC.out_buffer_p = 7
+    robotC.out_buffer_n = 8
+    robotB.out_buffer_p = 5
+    robotB.out_buffer_n = 6
+    time_click(2)
+
+    robotA.out_buffer_n = 1
+    robotC.out_buffer_p = 1
+    time_click(3)
 
 
 if __name__ == "__main__":
