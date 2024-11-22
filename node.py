@@ -26,7 +26,8 @@ class Node:
         self.out_buffer_n = None
 
     def __repr__(self):
-        return f"Node({self.id}, {self.active}, {self.data}, {self.prev.id}, {self.next.id})"
+        """Node repr"""
+        return f"Node({self.id:03d}, {self.active}, {self.data}, {self.prev.id:03d}, {self.next.id:03d})"
 
     def __str__(self):
         """Print the Node"""
