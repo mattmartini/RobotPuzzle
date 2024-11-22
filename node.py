@@ -71,12 +71,32 @@ class Node:
         """Deactivate Node"""
         self.active = 0
 
-    def action(self):
-        """Action taken this tic tock"""
-        pass
-        """ activate ? """
-        """ check buffers and register """
+    def turn_inside_out_and_explode(self):
+        """Explode"""
+        print(f"{self.id:03d}: Boom!")
+
+    def take_action(self, time="tic"):
+        """Action taken this tic or tock"""
+        if time == "tic":
+            if self.active == 0:
+                return
+            self.flush_output_buffers()
+        elif time == "tock":
+            info = self.read_input_buffers()
+            if self.active == 0:
+                if info == [None, None]:
+                    return
+                else:
+                    self.activate
+                    return
+            else:
+                """TODO set data and output+buffers"""
         """ decide on actions: explode or pass data """
+                if info == [1, 1]:
+                    self.turn_inside_out_and_explode()
+                pass
+        else:
+            raise ValueError(f"Time is either tic to tock: {time}")
 
 
 def test():
