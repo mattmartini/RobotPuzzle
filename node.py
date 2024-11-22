@@ -46,6 +46,23 @@ class Node:
 
         return string
 
+    def flush_output_buffers(self):
+        """Send data to neighbors, clear outgoing buffers"""
+        print(f"{self.id:03d}:    {self.prev.id:03d} <-- {self.out_buffer_p}")
+        self.prev.in_buffer_n = self.out_buffer_p
+        self.out_buffer_p = None
+
+        print(f"{self.id:03d}:    {self.out_buffer_n} --> {self.next.id:03d}")
+        self.next.in_buffer_p = self.out_buffer_n
+        self.out_buffer_n = None
+
+    def read_input_buffers(self):
+        """Read and clear input buffers"""
+        cur_buffers = [self.in_buffer_p, self.in_buffer_n]
+        self.in_buffer_p = None
+        self.in_buffer_n = None
+        return cur_buffers
+
     def action(self):
         """Action taken this tic tock"""
         pass
