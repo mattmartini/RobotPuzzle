@@ -91,7 +91,7 @@ class Node:
                     return
             else:
                 """TODO set data and output+buffers"""
-        """ decide on actions: explode or pass data """
+                """ decide on actions: explode or pass data """
                 if info == [1, 1]:
                     self.turn_inside_out_and_explode()
                 pass
@@ -122,9 +122,9 @@ def test():
     print("create_three_robots")
 
     def show_robots():
-    print(robotA)
-    print(robotB)
-    print(robotC)
+        print(robotA)
+        print(robotB)
+        print(robotC)
 
     def time_click(time=0):
         print(f"-  tic - {time:02d} -----------------------------------")
