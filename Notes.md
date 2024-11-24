@@ -19,3 +19,6 @@ Robot output:
 │_<--  1 0 _ -->0│    L_sent    l_rvc    register   r_rvc      R_sent 
 ╰────────────────╯
 ```
+
+
+Use getters and setters
