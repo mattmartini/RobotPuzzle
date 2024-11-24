@@ -5,19 +5,14 @@ __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.5"
 
 import logging
+import logging.config
 from node import Node
 from rich import print
+
 ## from rich import inspect
 
+logging.config.fileConfig("logging.conf")
 logger = logging.getLogger("RobotLogger")
-logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler("robots.log")
-
-formatter = logging.Formatter("%(name)-12s %(levelname)-8s %(message)s")
-fh.setFormatter(formatter)
-
-logger.addHandler(fh)
-logger.info("Import Logging")
 
 
 class CDLL:
@@ -30,6 +25,8 @@ class CDLL:
         self.head = None
         self.time = 0
         logger.info(f"Create CDLL N={self.num:d}")
+        # TODO create robots on instantiation
+        # self.create_robots()
 
     def __repr__(self):
         """Print the CDLL"""
