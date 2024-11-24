@@ -17,6 +17,7 @@ dev = [
     "pdoc>=15.0.0",
     "flake8>=7.1.1",
     "flake8-pytest-style>=2.0.0",
+    "bump-my-version>=0.28.1",
 ]
 
 [tool.pytest.ini_options]
