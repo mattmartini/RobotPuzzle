@@ -5,19 +5,11 @@ __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.5"
 
 import logging
+from rich import print
 
-# from rich import print
-from rich import inspect
+# from rich import inspect
 
-logging.basicConfig(
-    filename="node.log",
-    format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
-    filemode="a",
-)
-
-logger = logging.getLogger("Node")
-logger.setLevel(logging.DEBUG)
-logger.debug("New Run ---------------------------------------")
+logger = logging.getLogger(f"RobotLogger.{__name__}")
 
 
 class Node:

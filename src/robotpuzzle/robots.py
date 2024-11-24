@@ -4,9 +4,20 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.5"
 
+import logging
 from node import Node
 from rich import print
-from rich import inspect
+## from rich import inspect
+
+logger = logging.getLogger("RobotLogger")
+logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler("robots.log")
+
+formatter = logging.Formatter("%(name)-12s %(levelname)-8s %(message)s")
+fh.setFormatter(formatter)
+
+logger.addHandler(fh)
+logger.info("Import Logging")
 
 
 class CDLL:
@@ -18,6 +29,7 @@ class CDLL:
         self.count = 0
         self.head = None
         self.time = 0
+        logger.info(f"Create CDLL N={self.num:d}")
 
     def __repr__(self):
         """Print the CDLL"""
@@ -93,21 +105,25 @@ class CDLL:
 
 def test():
     """Test CDLL"""
-    print("-------------------------------------------------------------------")
+
+    logger.info("\n\n---------------- New Test Run ----------------\n")
+    print("\n----------- New Test Run -----------\n")
     robots = CDLL(3)
     robots.insert(0)
     robots.insert(1)
     robots.append()
-    inspect(robots, methods=True)
+    # inspect(robots, methods=True)
     robots.show_circle()
 
     bots = CDLL(2)
     bots.create_robots()
-    inspect(bots, methods=True)
+    # inspect(bots, methods=True)
     bots.show_circle()
 
 
 def main():
+
+    logger.info("---------------- New Main Run ----------------")
     print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
     robots = CDLL(3)
     robots.create_robots()

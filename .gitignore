@@ -1,4 +1,5 @@
 .venv
 __pycache__/
+node.log
+robots.log
 scratch
-src/robotpuzzle/node.log
