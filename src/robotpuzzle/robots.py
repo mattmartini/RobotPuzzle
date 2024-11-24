@@ -10,56 +10,7 @@ import logging.config
 from node import Node
 from rich import print
 
-## from rich import inspect
-CONFIG = """
-{
-    "version": 1,
-    "disable_existing_loggers": false,
-    "formatters": {
-        "simple": {
-            "format": "%(levelname)-8s - %(message)s"
-        },
-        "lessimple": {
-            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
-        }
-    },
-    "filters": {
-        "warnings_and_below": {
-            "()" : "__main__.filter_maker",
-            "level": "WARNING"
-        }
-    },
-    "handlers": {
-        "stdout": {
-            "class": "logging.StreamHandler",
-            "level": "INFO",
-            "formatter": "simple",
-            "stream": "ext://sys.stdout",
-            "filters": ["warnings_and_below"]
-        },
-        "stderr": {
-            "class": "logging.StreamHandler",
-            "level": "ERROR",
-            "formatter": "simple",
-            "stream": "ext://sys.stderr"
-        },
-        "file": {
-            "class": "logging.FileHandler",
-            "formatter": "lessimple",
-            "filename": "robots.log",
-            "mode": "a"
-        }
-    },
-    "root": {
-        "level": "DEBUG",
-        "handlers": [
-            "stderr",
-            "stdout",
-            "file"
-        ]
-    }
-}
-"""
+# from rich import inspect
 
 
 def filter_maker(level):
@@ -71,8 +22,8 @@ def filter_maker(level):
     return filter
 
 
-# logging.config.fileConfig("logging.conf")
-logging.config.dictConfig(json.loads(CONFIG))
+with open("logging_conf.json", "r") as file:
+    logging.config.dictConfig(json.load(file))
 logger = logging.getLogger("RobotLogger")
 
 
