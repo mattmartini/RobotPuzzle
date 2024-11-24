@@ -16,3 +16,8 @@ dev = [
     "ruff-lsp>=0.0.58",
     "pdoc>=15.0.0",
 ]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
