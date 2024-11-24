@@ -4,14 +4,75 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.5"
 
+import json
 import logging
 import logging.config
 from node import Node
 from rich import print
 
 ## from rich import inspect
+CONFIG = """
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "simple": {
+            "format": "%(levelname)-8s - %(message)s"
+        },
+        "lessimple": {
+            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
+        }
+    },
+    "filters": {
+        "warnings_and_below": {
+            "()" : "__main__.filter_maker",
+            "level": "WARNING"
+        }
+    },
+    "handlers": {
+        "stdout": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "simple",
+            "stream": "ext://sys.stdout",
+            "filters": ["warnings_and_below"]
+        },
+        "stderr": {
+            "class": "logging.StreamHandler",
+            "level": "ERROR",
+            "formatter": "simple",
+            "stream": "ext://sys.stderr"
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "formatter": "lessimple",
+            "filename": "robots.log",
+            "mode": "a"
+        }
+    },
+    "root": {
+        "level": "DEBUG",
+        "handlers": [
+            "stderr",
+            "stdout",
+            "file"
+        ]
+    }
+}
+"""
 
-logging.config.fileConfig("logging.conf")
+
+def filter_maker(level):
+    level = getattr(logging, level)
+
+    def filter(record):
+        return record.levelno <= level
+
+    return filter
+
+
+# logging.config.fileConfig("logging.conf")
+logging.config.dictConfig(json.loads(CONFIG))
 logger = logging.getLogger("RobotLogger")
 
 
@@ -24,7 +85,7 @@ class CDLL:
         self.count = 0
         self.head = None
         self.time = 0
-        logger.info(f"Create CDLL N={self.num:d}")
+        logger.debug(f"Create CDLL N={self.num:d}")
         # TODO create robots on instantiation
         # self.create_robots()
 
@@ -116,6 +177,7 @@ def test():
     bots.create_robots()
     # inspect(bots, methods=True)
     bots.show_circle()
+    logger.error("bleep blorp")
 
 
 def main():
