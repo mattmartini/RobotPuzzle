@@ -5,12 +5,16 @@
     "simple": {
       "format": "%(levelname)-8s - %(message)s"
     },
-    "lessimple": {
+    "standard": {
       "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
     },
     "custom": {
       "()" : "log.CustomFormatter",
-      "format" : "%(asctime)s - %(levelname)-8s - %(filename)s - %(funcName)s - %(message)s"
+      "format" : "%(asctime)s - %(levelname)-8s - %(filename)-12s - %(funcName)s - %(message)s"
+    },
+    "custom_simple": {
+      "()" : "log.CustomFormatter",
+      "format" : "%(levelname)-8s %(funcName)-10s - %(message)s"
     }
   },
   "filters": {
@@ -23,19 +27,19 @@
     "stdout": {
       "class": "logging.StreamHandler",
       "level": "INFO",
-      "formatter": "custom",
+      "formatter": "custom_simple",
       "stream": "ext://sys.stdout",
       "filters": ["warnings_and_below"]
     },
     "stderr": {
       "class": "logging.StreamHandler",
       "level": "ERROR",
-      "formatter": "simple",
+      "formatter": "custom_simple",
       "stream": "ext://sys.stderr"
     },
     "file": {
       "class": "logging.FileHandler",
-      "formatter": "lessimple",
+      "formatter": "custom",
       "filename": "robots.log",
       "mode": "a"
     }
