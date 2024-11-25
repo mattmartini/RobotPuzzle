@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2024-11-25
+
+### 🚀 Features
+
+- *(logging)* Add simple logging to Node
+- *(logging)* Move logging config to robots.py
+- *(logging)* Convert to config file for logging
+- *(logging)* Use in-line json for logging config
+- *(logging)* Move logging config to jason file
+- *(logging)* [**breaking**] Move logger definition to log.py
+- *(logging)* Reconfigure logging config
+
+### ⚙️ Miscellaneous Tasks
+
+- *(logging)* Remove non-json config
+- *(version)* Bump minor version
+
+### 🚜 Refactor
+
+- *(logging)* Remove extraneous code
+
+### 📚 Documentation
+
+- *(changelog)* Update Changelog
+
 ## [1.0.5] - 2024-11-24
 
 ### ⚙️ Miscellaneous Tasks
