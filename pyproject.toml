@@ -18,9 +18,11 @@ dev = [
     "flake8>=7.1.1",
     "flake8-pytest-style>=2.0.0",
     "bump-my-version>=0.28.1",
+    "pytest>=8.3.3",
 ]
 
 [tool.pytest.ini_options]
+pythonpath = "src"
 addopts = [
     "--import-mode=importlib",
 ]
