@@ -7,11 +7,15 @@
     },
     "lessimple": {
       "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
+    },
+    "custom": {
+      "()" : "log.CustomFormatter",
+      "format" : "%(asctime)s - %(levelname)-8s - %(filename)s - %(funcName)s - %(message)s"
     }
   },
   "filters": {
     "warnings_and_below": {
-      "()" : "__main__.filter_maker",
+      "()" : "log.filter_maker",
       "level": "WARNING"
     }
   },
@@ -19,7 +23,7 @@
     "stdout": {
       "class": "logging.StreamHandler",
       "level": "INFO",
-      "formatter": "simple",
+      "formatter": "custom",
       "stream": "ext://sys.stdout",
       "filters": ["warnings_and_below"]
     },

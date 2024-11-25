@@ -4,12 +4,10 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.5"
 
-import logging
+import log
 from rich import print
 
 # from rich import inspect
-
-logger = logging.getLogger(f"RobotLogger.{__name__}")
 
 
 class Node:
@@ -28,7 +26,8 @@ class Node:
         self.in_buffer_n = None
         self.out_buffer_p = None
         self.out_buffer_n = None
-        logger.info(f"Create node {self.id:03d}")
+        self.logger = log.get_logger()
+        self.logger.info(f"Create node {self.id:03d}")
 
     def __repr__(self):
         """Node repr"""
@@ -53,11 +52,15 @@ class Node:
 
     def flush_output_buffers(self):
         """Send data to neighbors, clear outgoing buffers"""
-        logger.debug(f"{self.id:03d}:    {self.prev.id:03d} <-- {self.out_buffer_p}")
+        self.logger.debug(
+            f"{self.id:03d}:    {self.prev.id:03d} <-- {self.out_buffer_p}"
+        )
         self.prev.in_buffer_n = self.out_buffer_p
         self.out_buffer_p = None
 
-        logger.debug(f"{self.id:03d}:    {self.out_buffer_n} --> {self.next.id:03d}")
+        self.logger.debug(
+            f"{self.id:03d}:    {self.out_buffer_n} --> {self.next.id:03d}"
+        )
         self.next.in_buffer_p = self.out_buffer_n
         self.out_buffer_n = None
 
@@ -66,34 +69,34 @@ class Node:
         cur_buffers = [self.in_buffer_p, self.in_buffer_n]
         self.in_buffer_p = None
         self.in_buffer_n = None
-        logger.debug(f"{self.id:03d}: input buffers {cur_buffers}")
+        self.logger.debug(f"{self.id:03d}: input buffers {cur_buffers}")
         return cur_buffers
 
     def activate(self):
         """Activate Node"""
         self.active = 1
-        logger.info(f"{self.id:03d}: Activated")
+        self.logger.info(f"{self.id:03d}: Activated")
 
     def deactivate(self):
         """Deactivate Node"""
         self.active = 0
-        logger.info(f"{self.id:03d}: Deactivated")
+        self.logger.info(f"{self.id:03d}: Deactivated")
 
     def turn_inside_out_and_explode(self):
         """Explode"""
         explosion = f"{self.id:03d}: Boom!"
         print(explosion)
-        logger.info(explosion)
+        self.logger.info(explosion)
 
     def take_action(self, time="tic"):
         """Action taken this tic or tock"""
         if time == "tic":
-            logger.debug(f"{self.id:03d}: tic")
+            self.logger.debug(f"{self.id:03d}: tic")
             if self.active == 0:
                 return
             self.flush_output_buffers()
         elif time == "tock":
-            logger.debug(f"{self.id:03d}: tock")
+            self.logger.debug(f"{self.id:03d}: tock")
             info = self.read_input_buffers()
             if self.active == 0:
                 if info == [None, None]:
@@ -131,7 +134,7 @@ def test():
     # print(repr(robotC))
     # print(locals())
     # inspect(robotA, methods=True)
-    logger.info("Create three robots")
+    robotA.logger.info("Create three robots")
 
     def show_robots():
         print(robotA)

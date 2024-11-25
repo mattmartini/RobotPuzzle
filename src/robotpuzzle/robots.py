@@ -4,27 +4,11 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.0.5"
 
-import json
-import logging
-import logging.config
 from node import Node
 from rich import print
+import log
 
 # from rich import inspect
-
-
-def filter_maker(level):
-    level = getattr(logging, level)
-
-    def filter(record):
-        return record.levelno <= level
-
-    return filter
-
-
-with open("logging_conf.json", "r") as file:
-    logging.config.dictConfig(json.load(file))
-logger = logging.getLogger("RobotLogger")
 
 
 class CDLL:
@@ -36,7 +20,8 @@ class CDLL:
         self.count = 0
         self.head = None
         self.time = 0
-        logger.debug(f"Create CDLL N={self.num:d}")
+        self.logger = log.get_logger()
+        self.logger.debug(f"Create CDLL N={self.num:d}")
         # TODO create robots on instantiation
         # self.create_robots()
 
@@ -58,6 +43,7 @@ class CDLL:
     def append(self, data=None):
         """Append a node"""
         self.insert(self.count, data)
+        self.logger.info("Append a Node")
         return
 
     def insert(self, index, data=None):
@@ -83,6 +69,7 @@ class CDLL:
         if index == 0:
             self.head = self.head.prev
         self.count += 1
+        self.logger.info("Insert a Node")
         return
 
     def get(self, index):
@@ -115,7 +102,7 @@ class CDLL:
 def test():
     """Test CDLL"""
 
-    logger.info("\n\n---------------- New Test Run ----------------\n")
+    # CDLL.logger_obj.info("\n\n---------------- New Test Run ----------------\n")
     print("\n----------- New Test Run -----------\n")
     robots = CDLL(3)
     robots.insert(0)
@@ -128,15 +115,15 @@ def test():
     bots.create_robots()
     # inspect(bots, methods=True)
     bots.show_circle()
-    logger.error("bleep blorp")
+    bots.logger.error("bleep blorp")
 
 
 def main():
 
-    logger.info("---------------- New Main Run ----------------")
     print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
     robots = CDLL(3)
     robots.create_robots()
+    robots.logger.info("---------------- New Main Run ----------------")
 
 
 if __name__ == "__main__":
