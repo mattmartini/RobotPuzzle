@@ -6,7 +6,9 @@ __version__ = "1.0.5"
 
 from node import Node
 from rich import print
-from rich import inspect
+import log
+
+# from rich import inspect
 
 
 class CDLL:
@@ -18,6 +20,10 @@ class CDLL:
         self.count = 0
         self.head = None
         self.time = 0
+        self.logger = log.get_logger()
+        self.logger.debug(f"Create CDLL N={self.num:d}")
+        # TODO create robots on instantiation
+        # self.create_robots()
 
     def __repr__(self):
         """Print the CDLL"""
@@ -37,6 +43,7 @@ class CDLL:
     def append(self, data=None):
         """Append a node"""
         self.insert(self.count, data)
+        self.logger.info("Append a Node")
         return
 
     def insert(self, index, data=None):
@@ -62,6 +69,7 @@ class CDLL:
         if index == 0:
             self.head = self.head.prev
         self.count += 1
+        self.logger.info("Insert a Node")
         return
 
     def get(self, index):
@@ -93,24 +101,29 @@ class CDLL:
 
 def test():
     """Test CDLL"""
-    print("-------------------------------------------------------------------")
+
+    # CDLL.logger_obj.info("\n\n---------------- New Test Run ----------------\n")
+    print("\n----------- New Test Run -----------\n")
     robots = CDLL(3)
     robots.insert(0)
     robots.insert(1)
     robots.append()
-    inspect(robots, methods=True)
+    # inspect(robots, methods=True)
     robots.show_circle()
 
     bots = CDLL(2)
     bots.create_robots()
-    inspect(bots, methods=True)
+    # inspect(bots, methods=True)
     bots.show_circle()
+    bots.logger.error("bleep blorp")
 
 
 def main():
+
     print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
     robots = CDLL(3)
     robots.create_robots()
+    robots.logger.info("---------------- New Main Run ----------------")
 
 
 if __name__ == "__main__":
