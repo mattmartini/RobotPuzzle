@@ -7,7 +7,6 @@ __version__ = "1.0.5"
 import json
 import logging
 import logging.config
-import os
 
 
 class CustomFormatter(logging.Formatter):
@@ -33,21 +32,19 @@ def filter_maker(level):
     return filter
 
 
-def get_logger(log_dir="./", log_file="robots2.log"):
-
-    # Create Log file directory if not exists
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-
-    # Build Log File Full Path
-    logPath = (
-        log_file
-        if os.path.exists(log_file)
-        else os.path.join(log_dir, (str(log_file) + ".log"))
-    )
+def get_logger():
+    """Creates a Log File and returns Logger object"""
 
     with open("logging_conf.json", "r") as file:
         logging.config.dictConfig(json.load(file))
     logger = logging.getLogger("RobotLogger")
 
+    """
+    logging_conf.json:
+    Send messages of severity INFO and WARNING to sys.stdout
+    Send messages of severity ERROR and above to sys.stderr
+    Send messages of severity DEBUG and above to file app.log
+    custom format will put the filename and function name in log
+
+    """
     return logger
