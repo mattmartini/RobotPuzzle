@@ -2,7 +2,7 @@
 
 __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
-__version__ = "1.0.5"
+__version__ = "1.1.0"
 
 from node import Node
 from rich import print
