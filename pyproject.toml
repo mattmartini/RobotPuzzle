@@ -33,7 +33,7 @@ log_date_format = "%Y-%m-%d %H:%M:%S"
 minversion = "6.0"
 filterwarnings = "ignore"
 cache_dir = ".pytest_cache"
-norecursedirs = ["docs", "build" ]
+norecursedirs = ["docs", "build", "scratch" ]
 
 [tool.black]
 exclude = '''/
