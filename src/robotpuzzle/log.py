@@ -20,31 +20,30 @@ class CustomFormatter(logging.Formatter):
             record.funcName = record.func_name_override
         if hasattr(record, "file_name_override"):
             record.filename = record.file_name_override
-        return super(CustomFormatter, self).format(record)
+        return super().format(record)
 
 
 def filter_maker(level):
+    """Filter by logging level"""
     level = getattr(logging, level)
 
-    def filter(record):
+    def filter_level(record):
         return record.levelno <= level
 
-    return filter
+    return filter_level
 
 
 def get_logger():
     """Creates a Log File and returns Logger object"""
 
-    with open("logging_conf.json", "r") as file:
+    with open("logging_conf.json", "r", encoding="utf-8") as file:
         logging.config.dictConfig(json.load(file))
     logger = logging.getLogger("RobotLogger")
 
-    """
-    logging_conf.json:
-    Send messages of severity INFO and WARNING to sys.stdout
-    Send messages of severity ERROR and above to sys.stderr
-    Send messages of severity DEBUG and above to file app.log
-    custom format will put the filename and function name in log
+    # logging_conf.json:
+    # Send messages of severity INFO and WARNING to sys.stdout
+    # Send messages of severity ERROR and above to sys.stderr
+    # Send messages of severity DEBUG and above to file app.log
+    # custom format will put the filename and function name in log
 
-    """
     return logger
