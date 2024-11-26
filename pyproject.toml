@@ -19,10 +19,24 @@ dev = [
     "flake8-pytest-style>=2.0.0",
     "bump-my-version>=0.28.1",
     "pytest>=8.3.3",
+    "pylint>=3.3.1",
 ]
 
 [tool.pytest.ini_options]
-pythonpath = "src"
-addopts = [
-    "--import-mode=importlib",
-]
+testpaths = [ "tests", "intergration" ]
+addopts = "-ra --showlocals -v --import-mode=importlib"
+log_cli = true
+log_cli_level = "DEBUG"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+minversion = "6.0"
+filterwarnings = "ignore"
+cache_dir = ".pytest_cache"
+norecursedirs = ["docs", "build" ]
+
+[tool.black]
+exclude = '''/
+    # Default values for Black.
+    \.eggs|\.git|\.hg|\.mypy_cache|\.nox|\.tox|\.venv|\.svn|_build|buck-out|build|dist
+/'''
+
