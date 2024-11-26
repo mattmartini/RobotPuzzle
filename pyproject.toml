@@ -26,12 +26,19 @@ dev = [
 [project.scripts]
 puzzle = "robots:main"
 
+# [build-system]
+# requires = ["flit_core>=3.2,<4"]
+# build-backend = "flit_core.buildapi"
+
+# [build-system]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
 
 [build-system]
 requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
-# [tool.setuptools.packages]
+# [tool.setuptools.packages]  # don't use, pulls in everything
 # find = {}  # Scan the project directory with the default parameters
 
 [tool.pytest.ini_options]
