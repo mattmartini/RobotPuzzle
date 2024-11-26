@@ -11,6 +11,7 @@ from rich import print
 
 
 class Node:
+    """Node class: Robot instance"""
 
     count = 0
 
@@ -105,8 +106,8 @@ class Node:
                     self.activate
                     return
             else:
-                """TODO set data and output+buffers"""
-                """ decide on actions: explode or pass data """
+                # TODO set data and output+buffers
+                #  decide on actions: explode or pass data
                 if info == [1, 1]:
                     self.turn_inside_out_and_explode()
                 pass

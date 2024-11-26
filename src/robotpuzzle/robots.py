@@ -12,6 +12,7 @@ import log
 
 
 class CDLL:
+    """CDLL class: Circle of Robots"""
 
     def __init__(self, num=0):
         """Initalize CDLL"""
@@ -44,7 +45,6 @@ class CDLL:
         """Append a node"""
         self.insert(self.count, data)
         self.logger.info("Append a Node")
-        return
 
     def insert(self, index, data=None):
         """Insert a node"""
@@ -119,6 +119,7 @@ def test():
 
 
 def main():
+    """Robots Main"""
 
     print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
     robots = CDLL(3)
