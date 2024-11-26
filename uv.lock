@@ -694,7 +694,7 @@ wheels = [
 [[package]]
 name = "robotpuzzle"
 version = "1.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "rich" },
     { name = "textual" },
