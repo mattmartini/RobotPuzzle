@@ -1,7 +1,8 @@
 """Tests for: Node for circular doubly linked list"""
 
-import pytest
-from node import Node
+# import pytest
+from robotpuzzle.node import Node
+import robotpuzzle.log
 
 
 def test_active():
