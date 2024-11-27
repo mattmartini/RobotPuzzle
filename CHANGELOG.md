@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2024-11-27
+
+### 🚀 Features
+
+- *(path)* Use sys.path to show current path
+
+### 🐛 Bug Fixes
+
+- *(package)* Fix paths to include package
+- *(paths)* Remove debugging for paths
+- *(package)* Fix paths to include package
+
+### ⚙️ Miscellaneous Tasks
+
+- *(uv)* Install pytest module
+- *(uv)* Add pylint
+- *(uv)* Add bpython
+- *(config)* Add configs for pylint, flake8, isort
+- *(uv)* Remove textual module
+- *(logs)* Create logs dir.  Git to ignore contents
+- *(logs)* Send logfile to logs dir
+- *(version)* Bump minor version
+
+### 🚜 Refactor
+
+- *(log)* Refactor per pylint
+- *(logging)* Move to pkgutil from os path
+
+### 🧪 Testing
+
+- Create tests for node and robots
+
+### 📚 Documentation
+
+- *(changelog)* Update Changelog
+- Add module docstring
+- Clean up comments as per pylint
+
+### 🎨 Styling
+
+- *(quoting)* Use proper quoting
+
+### 🚧 Build
+
+- *(pytest)* Ignore scratch dir
+- *(uv)* Add setuptools build system
+- *(backend)* Try other backends hatch, flit
+- *(pytest)* Add/remove pythonpath.  Seems not needed
+
 ## [1.1.0] - 2024-11-25
 
 ### 🚀 Features
