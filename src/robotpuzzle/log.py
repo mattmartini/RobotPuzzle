@@ -7,7 +7,8 @@ __version__ = "1.0.5"
 import json
 import logging
 import logging.config
-import os
+import pkgutil
+
 
 class CustomFormatter(logging.Formatter):
     """Custom Formatter does these 2 things:
@@ -36,10 +37,8 @@ def filter_maker(level):
 def get_logger():
     """Creates a Log File and returns Logger object"""
 
-    file_path = os.path.dirname(os.path.abspath(__file__))
-    config_file = f"{file_path}/logging_conf.json"
-    with open(config_file, "r", encoding="utf-8") as file:
-        logging.config.dictConfig(json.load(file))
+    config_data = pkgutil.get_data(__name__, "logging_conf.json")
+    logging.config.dictConfig(json.loads(config_data))
     logger = logging.getLogger("RobotLogger")
 
     # logging_conf.json:
@@ -49,3 +48,9 @@ def get_logger():
     # custom format will put the filename and function name in log
 
     return logger
+
+    # old implementation:
+    # file_path = os.path.dirname(os.path.abspath(__file__))
+    # config_file = f"{file_path}/logging_conf.json"
+    # with open(config_file, "r", encoding="utf-8") as file:
+    #     logging.config.dictConfig(json.load(file))
