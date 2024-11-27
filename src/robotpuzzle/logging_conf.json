@@ -40,7 +40,7 @@
     "file": {
       "class": "logging.FileHandler",
       "formatter": "custom",
-      "filename": "/Users/martini/Development/PythonDev/RobotPuzzle/app.log",
+      "filename": "/Users/martini/Development/PythonDev/RobotPuzzle/logs/app.log",
       "mode": "a"
     }
   },
