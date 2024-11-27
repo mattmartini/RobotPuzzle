@@ -4,9 +4,9 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.1.0"
 
-from node import Node
+from robotpuzzle.node import Node
+import robotpuzzle.log as log
 from rich import print
-import log
 
 # from rich import inspect
 

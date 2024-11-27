@@ -7,7 +7,7 @@ __version__ = "1.0.5"
 import json
 import logging
 import logging.config
-
+import os
 
 class CustomFormatter(logging.Formatter):
     """Custom Formatter does these 2 things:
@@ -36,7 +36,9 @@ def filter_maker(level):
 def get_logger():
     """Creates a Log File and returns Logger object"""
 
-    with open("logging_conf.json", "r", encoding="utf-8") as file:
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    config_file = f"{file_path}/logging_conf.json"
+    with open(config_file, "r", encoding="utf-8") as file:
         logging.config.dictConfig(json.load(file))
     logger = logging.getLogger("RobotLogger")
 

@@ -5,7 +5,7 @@ __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.1.0"
 
 import sys
-import log
+import robotpuzzle.log as log
 from rich import print
 
 # from rich import inspect

@@ -9,17 +9,17 @@
       "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
     },
     "custom": {
-      "()" : "log.CustomFormatter",
+      "()" : "robotpuzzle.log.CustomFormatter",
       "format" : "%(asctime)s - %(levelname)-8s - %(filename)-12s - %(funcName)s - %(message)s"
     },
     "custom_simple": {
-      "()" : "log.CustomFormatter",
+      "()" : "robotpuzzle.log.CustomFormatter",
       "format" : "%(levelname)-8s %(funcName)-10s - %(message)s"
     }
   },
   "filters": {
     "warnings_and_below": {
-      "()" : "log.filter_maker",
+      "()" : "robotpuzzle.log.filter_maker",
       "level": "WARNING"
     }
   },
@@ -40,7 +40,7 @@
     "file": {
       "class": "logging.FileHandler",
       "formatter": "custom",
-      "filename": "robots.log",
+      "filename": "/Users/martini/Development/PythonDev/RobotPuzzle/app.log",
       "mode": "a"
     }
   },
