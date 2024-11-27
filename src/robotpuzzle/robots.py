@@ -2,7 +2,7 @@
 
 __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 from robotpuzzle.node import Node
 import robotpuzzle.log as log
