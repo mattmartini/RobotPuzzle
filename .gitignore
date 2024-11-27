@@ -3,3 +3,5 @@ __pycache__/
 node.log
 robots.log
 scratch
+logs/**
+!.gitkeep

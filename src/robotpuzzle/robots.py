@@ -4,14 +4,15 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.1.0"
 
-from node import Node
+from robotpuzzle.node import Node
+import robotpuzzle.log as log
 from rich import print
-import log
 
 # from rich import inspect
 
 
 class CDLL:
+    """CDLL class: Circle of Robots"""
 
     def __init__(self, num=0):
         """Initalize CDLL"""
@@ -44,7 +45,6 @@ class CDLL:
         """Append a node"""
         self.insert(self.count, data)
         self.logger.info("Append a Node")
-        return
 
     def insert(self, index, data=None):
         """Insert a node"""
@@ -119,6 +119,7 @@ def test():
 
 
 def main():
+    """Robots Main"""
 
     print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
     robots = CDLL(3)
