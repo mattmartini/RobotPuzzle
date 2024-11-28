@@ -1,7 +1,15 @@
-.venv
+# Python-generated files
 __pycache__/
-node.log
-robots.log
-scratch
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# project specific files
 logs/**
 !.gitkeep
+scratch
