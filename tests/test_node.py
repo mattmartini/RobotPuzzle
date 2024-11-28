@@ -1,11 +1,30 @@
 """Tests for: Node for circular doubly linked list"""
 
-# import pytest
+import pytest
 from robotpuzzle.node import Node
-import robotpuzzle.log
 
 
-def test_active():
+@pytest.fixture
+def get_node():
+    """Get a node"""
+    robot = Node()
+    return robot
+
+
+def test_active(get_node):
     """Test action"""
-    robot_a = Node()
-    assert robot_a.active == 0
+    assert get_node.active == 0
+
+
+def test_data(get_node):
+    """Test data"""
+    assert get_node.data is None
+
+
+def test_buffers(get_node):
+    """Test data"""
+    assert get_node.data is None
+    assert get_node.in_buffer_p is None
+    assert get_node.in_buffer_n is None
+    assert get_node.out_buffer_p is None
+    assert get_node.out_buffer_n is None
