@@ -1,15 +1,16 @@
+
+!.gitkeep
 # Python-generated files
-__pycache__/
+# Virtual environments
+# project specific files
+*.egg-info
 *.py[oc]
+.venv
+__pycache__/
+tests/assets/
 build/
 dist/
-wheels/
-*.egg-info
-
-# Virtual environments
-.venv
-
-# project specific files
 logs/**
-!.gitkeep
+pytest_report.html
 scratch
+wheels/

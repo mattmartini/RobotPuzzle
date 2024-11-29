@@ -23,6 +23,7 @@ dev = [
     "pytest>=8.3.3",
     "pylint>=3.3.1",
     "bpython>=0.24",
+    "pytest-html>=4.1.1",
 ]
 
 [project.scripts]
