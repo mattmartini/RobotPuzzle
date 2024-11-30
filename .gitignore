@@ -5,12 +5,13 @@
 # project specific files
 *.egg-info
 *.py[oc]
+.coverage
 .venv
 __pycache__/
-tests/assets/
 build/
 dist/
 logs/**
 pytest_report.html
 scratch
+tests/assets/
 wheels/
