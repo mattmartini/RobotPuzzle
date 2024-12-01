@@ -88,6 +88,7 @@ class Node:
         explosion = f"{self.id:03d}: Boom!"
         print(explosion)
         self.logger.info(explosion)
+        return explosion
 
     def take_action(self, time="tic"):
         """Action taken this tic or tock"""
