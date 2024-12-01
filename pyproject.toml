@@ -62,6 +62,7 @@ minversion = "6.0"
 filterwarnings = "ignore"
 cache_dir = ".pytest_cache"
 norecursedirs = ["docs", "build", "scratch" ]
+markers = ["node","initial","robots"]
 
 [tool.black]
 exclude = '''/
