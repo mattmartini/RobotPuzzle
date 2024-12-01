@@ -4,12 +4,6 @@ import pytest
 from robotpuzzle.node import Node
 
 
-@pytest.fixture(name="new_node")
-def fixture_new_node():
-    """Returns a new node instance"""
-    return Node()
-
-
 def test_initial_repr(new_node):
     """Test initial repr"""
     cur_count = f"{Node.count - 1:03d}"
