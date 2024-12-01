@@ -90,7 +90,7 @@ class Node:
         self.logger.info(explosion)
         return explosion
 
-    def take_action(self, time="tic"):
+    def take_action(self, time=""):
         """Action taken this tic or tock"""
         if time == "tic":
             self.logger.debug(f"{self.id:03d}: tic")
@@ -113,7 +113,7 @@ class Node:
                     self.turn_inside_out_and_explode()
                 pass
         else:
-            raise ValueError(f"Time is either tic to tock: {time}")
+            raise ValueError(f"Time is either tic or tock: {time}")
 
 
 def test():
