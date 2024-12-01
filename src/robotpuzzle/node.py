@@ -103,9 +103,8 @@ class Node:
             if self.active == 0:
                 if info == [None, None]:
                     return
-                else:
-                    self.activate
-                    return
+                self.activate()
+                return info
             else:
                 # TODO set data and output+buffers
                 #  decide on actions: explode or pass data
