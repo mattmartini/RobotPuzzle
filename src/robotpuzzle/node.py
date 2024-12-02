@@ -4,6 +4,7 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.2.0"
 
+import random
 import robotpuzzle.log as log
 from rich import print
 
@@ -47,7 +48,7 @@ class Node:
         string += f"-->{(self.out_buffer_n, '_')[self.out_buffer_n is None]}│\n"
 
         string += "╰────────────────╯"
-        # string += print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
+        # string += "\nHello from [bold magenta]robotpuzzle![/bold magenta]"
 
         return string
 
@@ -94,85 +95,37 @@ class Node:
         """Action taken this tic or tock"""
         if time == "tic":
             self.logger.debug(f"{self.id:03d}: tic")
+            # self.logger.debug(f"{repr(self)}")
             if self.active == 0:
+                self.logger.debug(f"{self.id:03d}: tic")
                 return
             self.flush_output_buffers()
         elif time == "tock":
             self.logger.debug(f"{self.id:03d}: tock")
+            # self.logger.debug(f"{repr(self)}")
             info = self.read_input_buffers()
             if self.active == 0:
                 if info == [None, None]:
                     return
                 self.activate()
-                return info
+                return
             else:
                 # TODO set data and output+buffers
                 #  decide on actions: explode or pass data
                 if info == [1, 1]:
                     self.turn_inside_out_and_explode()
-                pass
+                self.out_buffer_p = abs(info[0] - 1)
+                self.out_buffer_n = info[1]
+                self.data = self.out_buffer_p & self.out_buffer_n
+                return info
         else:
             raise ValueError(f"Time is either tic or tock: {time}")
 
 
 def test():
     """Node test"""
-    Node.count = 0
-    print("-------------------------------------------------------------------")
-    print("-------------------------------------------------------------------")
-
-    robotA = Node()
-    robotB = Node()
-    robotB.prev = robotA
-    robotB.next = robotA
-    robotA.prev = robotB
-    robotA.next = robotB
-    robotC = Node()
-    robotC.prev = robotB
-    robotC.next = robotA
-    robotA.prev = robotC
-    robotB.next = robotC
-    # print(repr(robotC))
-    # print(locals())
-    # inspect(robotA, methods=True)
-    robotA.logger.info("Create three robots")
-
-    def show_robots():
-        print(robotA)
-        print(robotB)
-        print(robotC)
-
-    def time_click(time=0):
-        robotA.take_action("tic")
-        robotB.take_action("tic")
-        robotC.take_action("tic")
-        robotA.take_action("tock")
-        robotB.take_action("tock")
-        robotC.take_action("tock")
-        show_robots()
-
-    time_click(0)
-
-    robotA.data = 1
-    robotB.data = 1
-    robotC.data = 0
-    robotA.in_buffer_p = 1
-    robotB.out_buffer_p = 1
-    # print(inspect(robotB))
-    robotB.activate()
-    time_click(1)
-
-    robotC.out_buffer_p = 7
-    robotC.out_buffer_n = 8
-    robotB.out_buffer_p = 5
-    robotB.out_buffer_n = 6
-    time_click(2)
-
-    robotA.out_buffer_n = 1
-    robotC.out_buffer_p = 1
-    time_click(3)
-    robotC.turn_inside_out_and_explode()
-
+    # testing now done by pytest
+    pass
 
 if __name__ == "__main__":
     test()
