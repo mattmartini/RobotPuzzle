@@ -14,11 +14,14 @@ test_cmd=''
 
 make_test_cmd() {
   local -A config
-  config=(  [h]='html' [html]=0 )
-  config+=( [c]='cov' [cov]=0 )
-  config+=( [p]='pretty' [pretty]=1 )
-  config+=( [r]='random' [random]=1 )
-  config+=( [v]='verbose' [verbose]=0 )
+  config=(  [h]='html'     [html]=0 )
+  config+=( [c]='cov'      [cov]=0 )
+  config+=( [p]='pretty'   [pretty]=1 )
+  config+=( [r]='random'   [random]=1 )
+  config+=( [v]='verbose'  [verbose]=0 )
+  config+=( [o]='output'   [output]=0 )
+  config+=( [f]='fixtures' [fixtures]=0 )
+  config+=( [s]='setup'    [setup]=0 )
 
   arg_parse "$@"
 
@@ -39,6 +42,18 @@ make_test_cmd() {
 
   if [[ ${config[verbose]} != 1 ]]; then
     args+=' --no-header '
+  fi
+
+  if [[ ${config[output]} != 0 ]]; then
+    args+=' --capture=no '
+  fi
+
+  if [[ ${config[fixtures]} != 0 ]]; then
+    args+=' --fixtures-per-test '
+  fi
+
+  if [[ ${config[setup]} != 0 ]]; then
+    args+=' --setup-only '
   fi
 
   if [[ ${config[html]} != 0 ]]; then
