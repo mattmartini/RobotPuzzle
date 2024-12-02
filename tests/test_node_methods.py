@@ -5,14 +5,14 @@ from robotpuzzle.node import Node
 
 
 @pytest.mark.node
-def test_node_class_count_inc(new_node):
+def test_node_class_count_inc(multi_node):
     """Test class Node counter is incremented after each new node"""
-    cur_count = Node.count - 1
-    node_a = new_node
+    cur_count = Node.count
+    node_a = multi_node()
     assert node_a.id == cur_count
-    node_b = Node()
+    node_b = multi_node()
     assert node_b.id == cur_count + 1
-    node_c = Node()
+    node_c = multi_node()
     assert node_c.id == cur_count + 2
 
 

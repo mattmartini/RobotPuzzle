@@ -56,3 +56,4 @@ def test_initial_buffers(new_node):
     assert new_node.in_buffer_n is None
     assert new_node.out_buffer_p is None
     assert new_node.out_buffer_n is None
+
