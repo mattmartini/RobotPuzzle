@@ -6,15 +6,26 @@
       "format": "%(levelname)-8s - %(message)s"
     },
     "standard": {
+      "datefmt" : "%Y-%m-%d %H:%M:%S,uuu",
       "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
     },
     "custom": {
       "()" : "robotpuzzle.log.CustomFormatter",
+      "datefmt" : "%Y-%m-%d %H:%M:%S",
       "format" : "%(asctime)s - %(levelname)-8s - %(filename)-12s - %(funcName)s - %(message)s"
+    },
+    "rich_custom": {
+      "()" : "robotpuzzle.log.CustomFormatter",
+      "format" : "%(asctime)s -  %(filename)-12s - %(funcName)s - %(message)s"
     },
     "custom_simple": {
       "()" : "robotpuzzle.log.CustomFormatter",
       "format" : "%(levelname)-8s %(funcName)-10s - %(message)s"
+    },
+    "rich_simple": {
+      "()" : "robotpuzzle.log.CustomFormatter",
+      "datefmt" : "[%X]",
+      "format" : "%(funcName)-10s - %(message)s"
     }
   },
   "filters": {
@@ -24,12 +35,23 @@
     }
   },
   "handlers": {
+    "rich_stdout": {
+      "class": "rich.logging.RichHandler",
+      "level": "INFO",
+      "formatter": "rich_simple",
+      "filters": ["warnings_and_below"]
+    },
     "stdout": {
       "class": "logging.StreamHandler",
       "level": "INFO",
       "formatter": "custom_simple",
       "stream": "ext://sys.stdout",
       "filters": ["warnings_and_below"]
+    },
+    "rich_stderr": {
+      "class": "rich.logging.RichHandler",
+      "level": "ERROR",
+      "formatter": "rich_simple"
     },
     "stderr": {
       "class": "logging.StreamHandler",
@@ -47,8 +69,8 @@
   "root": {
     "level": "DEBUG",
     "handlers": [
-      "stderr",
-      "stdout",
+      "rich_stdout",
+      "rich_stderr",
       "file"
     ]
   }

@@ -8,6 +8,7 @@ import json
 import logging
 import logging.config
 import pkgutil
+from rich.logging import RichHandler
 
 
 class CustomFormatter(logging.Formatter):
@@ -54,3 +55,4 @@ def get_logger():
     # config_file = f"{file_path}/logging_conf.json"
     # with open(config_file, "r", encoding="utf-8") as file:
     #     logging.config.dictConfig(json.load(file))
+
