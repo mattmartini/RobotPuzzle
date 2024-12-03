@@ -1,17 +1,13 @@
 """Test for: Circular doubly linked list"""
 
-# import pytest
-from robotpuzzle.robots import CDLL
-import robotpuzzle.log
-
-import sys
-
-# with open("/tmp/python-sys-path.txt", "w") as outfile:
-#     outfile.write(str(sys.path))
+import pytest
 
 
-def test_size():
-    """test active"""
-    return
-    robot_cicrle = CDLL(3)
-    assert robot_cicrle.size == 1
+@pytest.mark.robots
+def test_circles(new_circle):
+    """Test CDLL scenario"""
+    a_circle = new_circle(3)
+    a_circle.create_robots()
+    a_circle.show_circle()
+    a_circle.logger.error("bleep blorp")
+
