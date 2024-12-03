@@ -29,7 +29,7 @@ make_test_cmd() {
   local args=''
 
   if [[ ${config[cov]} != 0 ]]; then
-    args+=' --cov=src --cov-branch '
+    args+=' --cov=src --cov-branch --cov-report html'
   fi
 
   if [[ ${config[pretty]} != 1 ]]; then

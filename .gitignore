@@ -10,6 +10,7 @@
 __pycache__/
 build/
 dist/
+htmlcov
 logs/**
 pytest_report.html
 scratch
