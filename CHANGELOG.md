@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2024-12-04
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump patch version
+
+### 🚜 Refactor
+
+- *(logging)* Remove f-strings in logging
+
+### 🧪 Testing
+
+- *(coverage)* Report in html
+- *(logging)* Add RichHandler, formats and handlers
+- *(fixtures)* Add fixtures for CDLLs
+- *(robots)* Add tests for CDLLs
+
+## [1.2.1] - 2024-12-02
+
+### 🚀 Features
+
+- *(pytest)* Configure pytest options; watch files and re-run tests
+
+### 🐛 Bug Fixes
+
+- *(regex)* Fix escaping of double quotes
+- *(node)* Remove default time value. Fix typo
+
+### ⚙️ Miscellaneous Tasks
+
+- *(uv)* Add pytest-html, ignore generated files
+- *(uv)* Add pytest plugins, pytest-cov pytest-sugar pytest-random-order
+- *(git)* Ignore .coverage
+- *(version)* Bump patch version
+
+### 🚜 Refactor
+
+- *(node)* Split tests: initial and methods
+
+### 🧪 Testing
+
+- *(robots)* Temporarily disable robot tests
+- *(node)* Add fixture returning a new node
+- *(node)* Define test for a new node, method tests
+- *(fixtures)* Move fixtures to conftest.py
+- *(markers)* Add markers for node and initial
+- *(node)* Add mode node tests. Fix activate call.
+- *(marks)* Add multi mark
+- *(fixtures)* Fixture for multiple nodes
+- *(node)* Move class tests to pytest
+
+### 📚 Documentation
+
+- *(changelog)* Update Changelog
+
+### 🚧 Build
+
+- *(git)* Update files ignored
+- *(metadata)* Add Author
+- *(pytest)* Add more options to the runner
+
 ## [1.2.0] - 2024-11-27
 
 ### 🚀 Features
