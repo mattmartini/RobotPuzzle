@@ -57,22 +57,22 @@ def test_nodes(multi_node):
     assert robot_a.buffers.input["next"] is None
     assert robot_a.buffers.input["prev"] is None
     time_click(robots)
-    assert robot_a.buffers.output["next"] == 0
+    assert robot_a.buffers.output["next"] == 5
     assert robot_a.buffers.output["prev"] == 8
     time_click(robots)
-    assert robot_a.buffers.output["next"] == 6
-    assert robot_a.buffers.output["prev"] == 4
+    assert robot_a.buffers.output["next"] == 2
+    assert robot_a.buffers.output["prev"] == 0
     time_click(robots)
-    assert robot_a.buffers.output["next"] == 0
-    assert robot_a.buffers.output["prev"] == 1
+    assert robot_a.buffers.output["next"] == 4
+    assert robot_a.buffers.output["prev"] == 7
     robot_c.buffers.output["prev"] = 1
     robot_a.buffers.output["next"] = 1
     time_click(robots)
     assert robot_a.buffers.output["next"] == 1
-    assert robot_a.buffers.output["prev"] == 0
+    assert robot_a.buffers.output["prev"] == 1
     time_click(robots)
-    assert robot_a.buffers.output["next"] == 3
-    assert robot_a.buffers.output["prev"] == 4
+    assert robot_a.buffers.output["next"] == 0
+    assert robot_a.buffers.output["prev"] == 6
     robot_d = multi_node()
     print(robot_d.buffers)
     robot_d.buffers.input["prev"] = 4
