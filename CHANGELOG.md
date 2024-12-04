@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 📚 Documentation
+
+- *(api)* Rebuild API docs
+
+### 🚧 Build
+
+- *(docs)* Script to create docs
+
+## [1.3.0] - 2024-12-04
+
+### 🚀 Features
+
+- *(buffers)* Change Node buffers to a class
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump minor version
+
+### 📚 Documentation
+
+- *(changelog)* Update Changelog
+- *(api)* Rebuild API docs
+
+### 🎨 Styling
+
+- *(typo)* Fix method name
+- *(robots)* Update repr output
+
 ## [1.2.2] - 2024-12-04
 
 ### ⚙️ Miscellaneous Tasks
