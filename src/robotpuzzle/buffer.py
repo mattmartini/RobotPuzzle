@@ -17,6 +17,10 @@ class Buffer:
         self.logger = log.get_logger()
         self.logger.info("Create buffer")
 
+    def __del__(self):
+        """Delete Buffer"""
+        self.logger.debug("Delete buffer")
+
     def __repr__(self):
         """Buffer repr"""
         string = f"Buffer(input:[ {self.input["prev"]}, {self.input["next"]} ], "

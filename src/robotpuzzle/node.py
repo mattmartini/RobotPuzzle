@@ -32,6 +32,10 @@ class Node:
 
         self.logger.info("Create node %03d", self.id)
 
+    def __del__(self):
+        """Delete Node"""
+        self.logger.debug("Delete Node %03d", self.id)
+
     @property
     def active(self):
         """Node Property: Active"""

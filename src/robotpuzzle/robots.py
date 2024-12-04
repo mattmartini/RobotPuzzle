@@ -26,6 +26,10 @@ class CDLL:
         # TODO create robots on instantiation
         # self.create_robots()
 
+    def __del__(self):
+        """Delete Node"""
+        self.logger.debug("Delete CDLL %03d", self.num)
+
     def __repr__(self):
         """Print the CDLL"""
         string = ""
