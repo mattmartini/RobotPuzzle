@@ -10,6 +10,11 @@ cleanup() {
   # yath stop
 }
 
+###   clear scrollback history
+iterm_clear_buffer() {
+  echo -e "\033]1337;ClearScrollback\x07"
+}
+
 test_cmd=''
 
 make_test_cmd() {
@@ -66,6 +71,8 @@ make_test_cmd() {
 make_test_cmd "$@"
 #echo "$test_cmd"
 
+
+iterm_clear_buffer
 
 eval " fd . 'src/' 'tests/'  -e py | entr $test_cmd"
 
