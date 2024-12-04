@@ -92,13 +92,13 @@ class Node:
     def flush_output_buffers(self):
         """Send data to neighbors, clear outgoing buffers"""
         self.logger.debug(
-            "%03d:    %03d <-- %03d", self.id, self.prev.id, self.buffers.output["prev"]
+            "%03d:    %03d <-- %d", self.id, self.prev.id, self.buffers.output["prev"]
         )
-        self.next.buffers.input["next"] = self.buffers.output["prev"]
+        self.prev.buffers.input["next"] = self.buffers.output["prev"]
         self.buffers.output["prev"] = None
 
         self.logger.debug(
-            "%03d:    %03d --> %03d", self.id, self.buffers.output["next"], self.next.id
+            "%03d:    %d --> %03d", self.id, self.buffers.output["next"], self.next.id
         )
         self.next.buffers.input["prev"] = self.buffers.output["next"]
         self.buffers.output["next"] = None
@@ -122,16 +122,16 @@ class Node:
         """Action taken this tic or tock"""
         if time == "tic":
             self.logger.debug("%03d: tic", self.id)
-            # self.logger.debug(f"{repr(self)}")
-            if self.active == 0:
-                self.logger.debug("%03d: tic", self.id)
+            if self.active is False:
+                self.logger.debug("%03d: tic - noop", self.id)
                 return
             self.flush_output_buffers()
         elif time == "tock":
             self.logger.debug("%03d: tock", self.id)
             info = self.read_input_buffers()
-            if self.active == 0:
+            if self.active is False:
                 if info == [None, None]:
+                    self.logger.debug("%03d: tock - noop", self.id)
                     return
                 self.activate()
                 return
