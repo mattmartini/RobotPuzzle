@@ -33,7 +33,7 @@ def test_initial_empty_num(empty_circle):
 
 @pytest.mark.initial
 @pytest.mark.robots
-def test_initial_empty_robots_needed(empty_circle):
+def test_initial_robots_needed(empty_circle):
     """Test CDLL initial robots needed"""
     assert empty_circle.robots_needed == 1
 
