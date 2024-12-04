@@ -36,7 +36,7 @@ class Buffer:
                 return str(fal)
             return f"{ex}"
 
-        string = "\n ┌───────────────────┐\n"
+        string = " ┌───────────────────┐\n"
         string += f"B│ In:[{vin(self.input["prev"])},{vin(self.input["next"])}] "
         string += f"Out:[{vin(self.output["prev"])},{vin(self.output["next"])}]│\n"
         string += " └───────────────────┘"
