@@ -1,19 +1,15 @@
 """Test Fixtures"""
 
 import pytest
+from robotpuzzle.buffer import Buffer
 from robotpuzzle.node import Node
 from robotpuzzle.robots import CDLL
 
 
-@pytest.fixture(name="multi_node")
-def fixture_new_node():
-    """Returns a new node instance function"""
-
-    def _fixture_new_node():
-        a_node = Node()
-        return a_node
-
-    return _fixture_new_node
+@pytest.fixture(name="new_buffer")
+def get_new_buffer():
+    """Returns a new buffer instance"""
+    return Buffer()
 
 
 @pytest.fixture(name="new_node")
@@ -26,6 +22,17 @@ def get_new_node():
 def fixture_session_node(scope="session"):
     """Returns a new session node instance"""
     return Node()
+
+
+@pytest.fixture(name="multi_node")
+def fixture_new_node():
+    """Returns a new node instance function"""
+
+    def _fixture_new_node():
+        a_node = Node()
+        return a_node
+
+    return _fixture_new_node
 
 
 @pytest.fixture(name="empty_circle")

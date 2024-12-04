@@ -5,6 +5,12 @@ from robotpuzzle.node import Node
 
 
 @pytest.mark.node
+def test_node_class_get_count(new_node):
+    """Test class getter"""
+    assert new_node.count == Node.count
+
+
+@pytest.mark.node
 def test_node_class_count_inc(multi_node):
     """Test class Node counter is incremented after each new node"""
     cur_count = Node.count
@@ -19,19 +25,19 @@ def test_node_class_count_inc(multi_node):
 @pytest.mark.node
 def test_activate(new_node):
     """Test that activate method activates node"""
-    assert new_node.active == 0
+    assert new_node.active is False
     new_node.activate()
-    assert new_node.active == 1
+    assert new_node.active is True
 
 
 @pytest.mark.node
 def test_deactivate(new_node):
     """Test that activate method activates node"""
-    assert new_node.active == 0
+    assert new_node.active is False
     new_node.activate()
-    assert new_node.active == 1
+    assert new_node.active is True
     new_node.deactivate()
-    assert new_node.active == 0
+    assert new_node.active is False
 
 
 @pytest.mark.node
@@ -44,35 +50,35 @@ def test_turn_inside_out_and_explode(new_node):
 @pytest.mark.node
 def test_flush_output_buffers(new_node):
     """Test output buffers sent to neighbors, buffers flushed"""
-    assert new_node.in_buffer_p is None
-    assert new_node.in_buffer_n is None
-    assert new_node.out_buffer_p is None
-    assert new_node.out_buffer_n is None
-    new_node.out_buffer_p = 3
-    new_node.out_buffer_n = 7
-    assert new_node.out_buffer_p == 3
-    assert new_node.out_buffer_n == 7
+    assert new_node.buffers.input["prev"] is None
+    assert new_node.buffers.input["next"] is None
+    assert new_node.buffers.output["prev"] is None
+    assert new_node.buffers.output["next"] is None
+    new_node.buffers.output["prev"] = 3
+    new_node.buffers.output["next"] = 7
+    assert new_node.buffers.output["prev"] == 3
+    assert new_node.buffers.output["next"] == 7
     new_node.flush_output_buffers()
-    assert new_node.in_buffer_p == 7
-    assert new_node.in_buffer_n == 3
-    assert new_node.out_buffer_p is None
-    assert new_node.out_buffer_n is None
+    assert new_node.buffers.input["prev"] == 7
+    assert new_node.buffers.input["next"] == 3
+    assert new_node.buffers.output["prev"] is None
+    assert new_node.buffers.output["next"] is None
 
 
 @pytest.mark.node
 def test_read_input_buffers(new_node):
     """Test input buffers from to neighbors, buffers flushed"""
-    assert new_node.in_buffer_p is None
-    assert new_node.in_buffer_n is None
-    new_node.in_buffer_p = 9
-    new_node.in_buffer_n = 2
-    assert new_node.in_buffer_p == 9
-    assert new_node.in_buffer_n == 2
+    assert new_node.buffers.input["prev"] is None
+    assert new_node.buffers.input["next"] is None
+    new_node.buffers.input["prev"] = 9
+    new_node.buffers.input["next"] = 2
+    assert new_node.buffers.input["prev"] == 9
+    assert new_node.buffers.input["next"] == 2
     buffers = new_node.read_input_buffers()
     assert buffers[0] == 9
     assert buffers[1] == 2
-    assert new_node.in_buffer_p is None
-    assert new_node.in_buffer_n is None
+    assert new_node.buffers.input["prev"] is None
+    assert new_node.buffers.input["next"] is None
 
 
 @pytest.mark.node
@@ -90,15 +96,15 @@ def test_take_action_tic(new_node):
     returned = new_node.take_action("tic")
     assert returned is None
     new_node.activate()
-    new_node.out_buffer_p = 4
-    new_node.out_buffer_n = 5
-    assert new_node.out_buffer_p == 4
-    assert new_node.out_buffer_n == 5
+    new_node.buffers.output["prev"] = 4
+    new_node.buffers.output["next"] = 5
+    assert new_node.buffers.output["prev"] == 4
+    assert new_node.buffers.output["next"] == 5
     returned = new_node.take_action("tic")
-    assert new_node.in_buffer_p == 5
-    assert new_node.in_buffer_n == 4
-    assert new_node.out_buffer_p is None
-    assert new_node.out_buffer_n is None
+    assert new_node.buffers.input["prev"] == 5
+    assert new_node.buffers.input["next"] == 4
+    assert new_node.buffers.output["prev"] is None
+    assert new_node.buffers.output["next"] is None
 
 
 @pytest.mark.node
@@ -107,14 +113,14 @@ def test_take_action_tock(new_node):
     assert new_node.active == 0
     returned = new_node.take_action("tock")
     assert returned is None
-    assert new_node.in_buffer_p is None
-    assert new_node.in_buffer_n is None
-    new_node.in_buffer_p = 1
-    new_node.in_buffer_n = 5
+    assert new_node.buffers.input["prev"] is None
+    assert new_node.buffers.input["next"] is None
+    new_node.buffers.input["prev"] = 1
+    new_node.buffers.input["next"] = 5
     returned = new_node.take_action("tock")
     assert new_node.active == 1
-    assert new_node.in_buffer_p is None
-    assert new_node.in_buffer_n is None
-    new_node.in_buffer_p = 1
-    new_node.in_buffer_n = 1
+    assert new_node.buffers.input["prev"] is None
+    assert new_node.buffers.input["next"] is None
+    new_node.buffers.input["prev"] = 1
+    new_node.buffers.input["next"] = 1
     returned = new_node.take_action("tock")

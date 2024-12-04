@@ -5,9 +5,8 @@ __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.2.2"
 
 from rich import print
-
-# from rich import pretty
 from robotpuzzle import log
+from robotpuzzle import buffer
 
 
 class Node:
@@ -15,20 +14,42 @@ class Node:
 
     count = 0
 
+    @classmethod
+    def inc_count(cls):
+        """Increment the Class count"""
+        cls.count += 1
+
     def __init__(self, data=None):
         """Initalize Node"""
         self.id = Node.count
-        Node.count += 1
-        self.active = 0
+        Node.inc_count()
+        self._active = False
         self.data = data
         self.prev = self
         self.next = self
-        self.in_buffer_p = None
-        self.in_buffer_n = None
-        self.out_buffer_p = None
-        self.out_buffer_n = None
+        self.buffers = buffer.Buffer()
         self.logger = log.get_logger()
+
         self.logger.info("Create node %03d", self.id)
+
+    @property
+    def active(self):
+        """Node Property: Active"""
+        return self._active
+
+    @active.setter
+    def active(self, active):
+        self._active = active
+
+    def activate(self):
+        """Activate Node"""
+        self.active = True
+        self.logger.info("%03d: Activated", self.id)
+
+    def deactivate(self):
+        """Deactivate Node"""
+        self.active = False
+        self.logger.info("%03d: Deactivated", self.id)
 
     def __repr__(self):
         """Node repr"""
@@ -38,58 +59,59 @@ class Node:
 
     def __str__(self):
         """Print the Node"""
-        string = "╭────────────────╮\n"
-        string += f"│{self.prev.id:03d}  {('-', '+')[self.active]} "
-        string += f"{self.id:03d} {('-', '+')[self.active]} {self.next.id:03d}│\n"
 
-        string += f"│{(self.out_buffer_p, '_')[self.out_buffer_p is None]}<--"
-        string += f"  {(self.in_buffer_p, '_')[self.in_buffer_p is None]} "
-        string += f"{(self.data, '_')[self.data is None]} "
-        string += f"{(self.in_buffer_n, '_')[self.in_buffer_n is None]} "
-        string += f"-->{(self.out_buffer_n, '_')[self.out_buffer_n is None]}│\n"
+        def vtf(ex, fal="-", tru="+"):
+            """Return string based on expression"""
+            if ex == 0:
+                return str(fal)
+            return str(tru)
 
-        string += "╰────────────────╯"
-        # string += "\nHello from [bold magenta]robotpuzzle![/bold magenta]"
+        def vin(ex, fal="_"):
+            """Return string based on expression"""
+            if ex is None:
+                return str(fal)
+            return f"{ex}"
+
+        string = "╭─────────────────╮\n"
+        string += f"│{self.prev.id:03d}  "
+        string += f"{vtf(self.active)} {self.id:03d} {vtf(self.active)}  "
+        string += f"{self.next.id:03d}│\n"
+        string += f"│{vin(self.buffers.output["prev"])}<--"
+        string += f" {vin(self.buffers.input["prev"])}  "
+        string += f"{vin(self.data)}"
+        string += f"  {vin(self.buffers.input["next"])} "
+        string += f"-->{vin(self.buffers.output["next"])}│\n"
+        string += "╰─────────────────╯"
 
         return string
 
     def flush_output_buffers(self):
         """Send data to neighbors, clear outgoing buffers"""
         self.logger.debug(
-            "%03d:    %03d <-- %03d", self.id, self.prev.id, self.out_buffer_p
+            "%03d:    %03d <-- %03d", self.id, self.prev.id, self.buffers.output["prev"]
         )
-        self.prev.in_buffer_n = self.out_buffer_p
-        self.out_buffer_p = None
+        self.next.buffers.input["next"] = self.buffers.output["prev"]
+        self.buffers.output["prev"] = None
 
         self.logger.debug(
-            "%03d:    %03d --> %03d", self.id, self.out_buffer_n, self.next.id
+            "%03d:    %03d --> %03d", self.id, self.buffers.output["next"], self.next.id
         )
-        self.next.in_buffer_p = self.out_buffer_n
-        self.out_buffer_n = None
+        self.next.buffers.input["prev"] = self.buffers.output["next"]
+        self.buffers.output["next"] = None
 
     def read_input_buffers(self):
         """Read and clear input buffers"""
-        cur_buffers = [self.in_buffer_p, self.in_buffer_n]
-        self.in_buffer_p = None
-        self.in_buffer_n = None
+        cur_buffers = [self.buffers.input["prev"], self.buffers.input["next"]]
+        self.buffers.input["prev"] = None
+        self.buffers.input["next"] = None
         self.logger.debug("%03d: input buffers %s", self.id, cur_buffers)
         return cur_buffers
-
-    def activate(self):
-        """Activate Node"""
-        self.active = 1
-        self.logger.info("%03d: Activated", self.id)
-
-    def deactivate(self):
-        """Deactivate Node"""
-        self.active = 0
-        self.logger.info("%03d: Deactivated", self.id)
 
     def turn_inside_out_and_explode(self):
         """Explode"""
         explosion = f"{self.id:03d}: [red]Boom![/red]"
         print(explosion)
-        self.logger.info("%03d: Boom!",self.id)
+        self.logger.info("%03d: Boom!", self.id)
         return explosion
 
     def take_action(self, time=""):
@@ -114,9 +136,9 @@ class Node:
                 #  decide on actions: explode or pass data
                 if info == [1, 1]:
                     self.turn_inside_out_and_explode()
-                self.out_buffer_p = abs(info[0] - 1)
-                self.out_buffer_n = info[1]
-                self.data = self.out_buffer_p & self.out_buffer_n
+                self.buffers.output["prev"] = abs(info[0] - 1)
+                self.buffers.output["next"] = info[1]
+                self.data = self.buffers.output["prev"] & self.buffers.output["next"]
                 return info
         else:
             raise ValueError(f"Time is either tic or tock: {time}")
