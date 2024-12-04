@@ -14,7 +14,7 @@ def test_initial_empty_count(empty_circle):
 @pytest.mark.robots
 def test_initial_repr(empty_circle):
     """Test initial repr"""
-    assert "Doubly Circular Linked List" in str(repr(empty_circle))
+    assert "Circular Doubly Linked List" in str(repr(empty_circle))
 
 
 @pytest.mark.initial

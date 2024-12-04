@@ -31,10 +31,10 @@ class CDLL:
         string = ""
 
         if self.head is None:
-            string += "Doubly Circular Linked List Empty"
+            string += "Circular Doubly Linked List Empty"
             return string
 
-        string += f"Doubly Circular Linked List:\n{self.head.data}"
+        string += f"Circular Doubly Linked List:\n{self.head.data}"
         temp = self.head.next
         while temp != self.head:
             string += f" -> {temp.data}"
