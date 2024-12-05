@@ -111,9 +111,9 @@ class CDLL:
         console.rule("Circle of Robots")
         for _ in range(self.count):
             if robot.active is True:
-                console.print(robot, style="active_node")
+                console.print(robot.node_panel(), style="active_node")
             elif robot.active is False:
-                console.print(robot, style="inactive_node")
+                console.print(robot.node_panel(), style="inactive_node")
             robot = robot.next
 
     def create_robots(self):
