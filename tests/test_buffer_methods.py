@@ -11,7 +11,7 @@ def test_get_inputs(new_buffer):
     new_buffer.input["prev"] = 3
     new_buffer.input["next"] = 5
     assert new_buffer.get_inputs() == [3, 5]
-    console.print(new_buffer, style="buffer")
+    console.print(new_buffer.buffer_panel(), style="buffer")
 
 
 @pytest.mark.buffer
@@ -22,7 +22,7 @@ def test_set_inputs(new_buffer):
     new_buffer.set_inputs(pre=1, nex=6)
     assert new_buffer.get_inputs() == [1, 6]
     new_buffer.logger.debug(new_buffer.get_inputs())
-    console.print(new_buffer, style="buffer")
+    console.print(new_buffer.buffer_panel(), style="buffer")
 
 
 @pytest.mark.buffer
@@ -32,7 +32,7 @@ def test_get_outputs(new_buffer):
     new_buffer.output["prev"] = 2
     new_buffer.output["next"] = 6
     assert new_buffer.get_outputs() == [2, 6]
-    console.print(new_buffer, style="buffer")
+    console.print(new_buffer.buffer_panel(), style="buffer")
 
 
 @pytest.mark.buffer
@@ -43,4 +43,4 @@ def test_set_outputs(new_buffer):
     new_buffer.set_outputs(pre=0, nex=6)
     assert new_buffer.get_outputs() == [0, 6]
     new_buffer.logger.debug(new_buffer.get_outputs())
-    console.print(new_buffer, style="buffer")
+    console.print(new_buffer.buffer_panel(), style="buffer")

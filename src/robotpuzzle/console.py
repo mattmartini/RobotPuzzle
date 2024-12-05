@@ -6,6 +6,8 @@ __version__ = "1.3.1"
 
 from rich.console import Console
 from rich.theme import Theme
+from rich.panel import Panel
+from rich.columns import Columns
 
 robot_theme = Theme(
     {
