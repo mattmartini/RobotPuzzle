@@ -91,14 +91,17 @@ class Node:
 
     def flush_output_buffers(self):
         """Send data to neighbors, clear outgoing buffers"""
+        # FIXME want to clear inputs in a way that makes them visible
+        # self.buffers.input["prev"] = None
+        # self.buffers.input["next"] = None
         self.logger.debug(
-            "%03d:    %03d <-- %d", self.id, self.prev.id, self.buffers.output["prev"]
+            "%03d:    %03d <-- %s", self.id, self.prev.id, self.buffers.output["prev"]
         )
         self.prev.buffers.input["next"] = self.buffers.output["prev"]
         self.buffers.output["prev"] = None
 
         self.logger.debug(
-            "%03d:    %d --> %03d", self.id, self.buffers.output["next"], self.next.id
+            "%03d:    %s --> %03d", self.id, self.buffers.output["next"], self.next.id
         )
         self.next.buffers.input["prev"] = self.buffers.output["next"]
         self.buffers.output["next"] = None
@@ -135,15 +138,42 @@ class Node:
                 self.logger.debug("%03d: tock - noop", self.id)
                 return
             self.activate()
+            if info[0] == 0:
+                self.data = 1
+                self.buffers.output["next"] = 0
+            if info[0] == 1:
+                self.data = 0
+                self.buffers.output["next"] = 1
+            if info[1] == 0:
+                self.data = 1
+                self.buffers.output["prev"] = 0
+            if info[1] == 1:
+                self.data = 0
+                self.buffers.output["prev"] = 1
+            # if info[0] is not None:
+            #     self.buffers.output["next"] = 1
+            # if info[1] is not None:
+            #     self.buffers.output["prev"] = 1
             return
         else:
             # TODO set data and output+buffers
             #  decide on actions: explode or pass data
+            if info[0] == 0:
+                self.buffers.output["next"] = self.data
+                self.data = 0
+            if info[0] == 1:
+                self.buffers.output["next"] = self.data
+                self.data = 1
+            if info[1] == 0:
+                self.buffers.output["prev"] = self.data
+                self.data = 0
+            if info[1] == 1:
+                self.buffers.output["prev"] = self.data
+                self.data = 1
+
             if info == [1, 1]:
                 self.turn_inside_out_and_explode()
-            self.buffers.output["prev"] = abs(info[0] - 1)
-            self.buffers.output["next"] = info[1]
-            self.data = self.buffers.output["prev"] & self.buffers.output["next"]
+                self.data = 'X'
             return info
 
     def take_action(self, time=""):
