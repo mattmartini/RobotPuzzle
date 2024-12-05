@@ -44,7 +44,7 @@ def test_deactivate(new_node):
 def test_turn_inside_out_and_explode(new_node):
     """Test that node explodes"""
     cur_count = f"{Node.count - 1:03d}"
-    assert new_node.turn_inside_out_and_explode() == f"{cur_count}: [red]Boom![/red]"
+    assert new_node.turn_inside_out_and_explode() == f"{cur_count}: Boom!"
 
 
 @pytest.mark.node

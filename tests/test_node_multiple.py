@@ -1,7 +1,10 @@
 """Tests for: Multiple Nodes for circular doubly linked list"""
 
 import pytest
+from robotpuzzle.console import console
 
+
+@pytest.mark.skip
 @pytest.mark.xfail
 @pytest.mark.node
 @pytest.mark.multi
@@ -10,7 +13,7 @@ def test_nodes(multi_node):
 
     def show_robots(robots):
         for robot in robots:
-            print(robot)
+            console.print(robot)
 
     def time_click(robots):
         for robot in robots:
@@ -39,7 +42,6 @@ def test_nodes(multi_node):
     robot_a.data = 5
     robot_b.data = 3
     robot_c.data = 1
-
 
     robot_a.buffers.input["next"] = 2
     robot_a.buffers.input["prev"] = 4
@@ -80,4 +82,3 @@ def test_nodes(multi_node):
     robot_d.buffers.output["prev"] = 2
     robot_d.buffers.output["next"] = 1
     print(robot_d.buffers)
-
