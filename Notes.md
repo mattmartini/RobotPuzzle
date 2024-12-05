@@ -22,3 +22,5 @@ Robot output:
 
 
 Use getters and setters
+
+`export PYTHONSTARTUP=src/robotpuzzle/bpython_setup.py`  
