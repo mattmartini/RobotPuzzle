@@ -4,9 +4,9 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.3.1"
 
-from rich import print
 from robotpuzzle import log
 from robotpuzzle import buffer
+from robotpuzzle.console import console
 
 
 class Node:
@@ -116,8 +116,8 @@ class Node:
 
     def turn_inside_out_and_explode(self):
         """Explode"""
-        explosion = f"{self.id:03d}: [red]Boom![/red]"
-        print(explosion)
+        explosion = f"{self.id:03d}: Boom!"
+        console.print(explosion, style="explosion")
         self.logger.info("%03d: Boom!", self.id)
         return explosion
 
