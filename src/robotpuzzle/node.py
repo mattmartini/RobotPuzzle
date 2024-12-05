@@ -146,8 +146,6 @@ class Node:
             self.data = self.buffers.output["prev"] & self.buffers.output["next"]
             return info
 
-
-
     def take_action(self, time=""):
         """Action taken this tic or tock"""
         if time == "tic":

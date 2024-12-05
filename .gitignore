@@ -1,8 +1,4 @@
-
 !.gitkeep
-# Python-generated files
-# Virtual environments
-# project specific files
 *.egg-info
 *.py[oc]
 .coverage
