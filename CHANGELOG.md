@@ -4,9 +4,38 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🚀 Features
+
+- *(docs)* Update make_docs.sh to include changelog
+- *(classes)* Log class instance deletion
+- *(pytest)* Clear scrollback buffer before a series of tests
+- *(puzzle)* Point puzzle at robotpuzzle:main in __init__.py
+- *(puzzle)* Add commands for puzzle (uv run puzzle), bpython startup
+- *(robots)* Add run_clock method
+
+### 🐛 Bug Fixes
+
+- *(node)* [**breaking**] Fix algorythm error caused by typo
+
+### ⚙️ Miscellaneous Tasks
+
+- *(notes)* Add note for PYTHONSTARTUP
+- *(notes)* Add circle diagram
+- *(version)* Bump patch version
+
+### 🚜 Refactor
+
+- *(node)* Move actions on tic and tock to new methods
+- *(tock)* Change algorithm for robots
+
 ### 📚 Documentation
 
 - *(api)* Rebuild API docs
+- *(changelog)* Update Changelog
+
+### 🎨 Styling
+
+- *(buffer)* Remove extra linefeed from repr
 
 ## [1.3.1] - 2024-12-05
 
