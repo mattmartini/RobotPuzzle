@@ -118,32 +118,42 @@ class Node:
         self.logger.info("%03d: Boom!", self.id)
         return explosion
 
+    def time_tic(self):
+        """Action taken on clock tic"""
+        self.logger.debug("%03d: tic", self.id)
+        if self.active is False:
+            self.logger.debug("%03d: tic - noop", self.id)
+            return
+        self.flush_output_buffers()
+
+    def time_tock(self):
+        """Action taken on clock tock"""
+        self.logger.debug("%03d: tock", self.id)
+        info = self.read_input_buffers()
+        if self.active is False:
+            if info == [None, None]:
+                self.logger.debug("%03d: tock - noop", self.id)
+                return
+            self.activate()
+            return
+        else:
+            # TODO set data and output+buffers
+            #  decide on actions: explode or pass data
+            if info == [1, 1]:
+                self.turn_inside_out_and_explode()
+            self.buffers.output["prev"] = abs(info[0] - 1)
+            self.buffers.output["next"] = info[1]
+            self.data = self.buffers.output["prev"] & self.buffers.output["next"]
+            return info
+
+
+
     def take_action(self, time=""):
         """Action taken this tic or tock"""
         if time == "tic":
-            self.logger.debug("%03d: tic", self.id)
-            if self.active is False:
-                self.logger.debug("%03d: tic - noop", self.id)
-                return
-            self.flush_output_buffers()
+            self.time_tic()
         elif time == "tock":
-            self.logger.debug("%03d: tock", self.id)
-            info = self.read_input_buffers()
-            if self.active is False:
-                if info == [None, None]:
-                    self.logger.debug("%03d: tock - noop", self.id)
-                    return
-                self.activate()
-                return
-            else:
-                # TODO set data and output+buffers
-                #  decide on actions: explode or pass data
-                if info == [1, 1]:
-                    self.turn_inside_out_and_explode()
-                self.buffers.output["prev"] = abs(info[0] - 1)
-                self.buffers.output["next"] = info[1]
-                self.data = self.buffers.output["prev"] & self.buffers.output["next"]
-                return info
+            self.time_tock()
         else:
             raise ValueError(f"Time is either tic or tock: {time}")
 
