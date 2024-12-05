@@ -1,7 +1,7 @@
 """RobotPuzzle Init"""
 
-__date__ = "2024-12-04"
-__version__ = "1.3.0"
+__date__ = '2024-12-05'
+__version__ = "1.3.1"
 
 from rich import pretty, inspect, print
 from robotpuzzle import node
