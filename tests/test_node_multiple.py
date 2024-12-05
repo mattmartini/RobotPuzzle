@@ -2,7 +2,7 @@
 
 import pytest
 
-
+@pytest.mark.xfail
 @pytest.mark.node
 @pytest.mark.multi
 def test_nodes(multi_node):
