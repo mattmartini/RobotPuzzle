@@ -3,7 +3,7 @@
 __date__ = '2024-12-05'
 __version__ = "1.3.1"
 
-from rich import pretty, inspect, print
+from rich import inspect
 from robotpuzzle import node
 from robotpuzzle import robots
 from robotpuzzle import buffer
@@ -11,7 +11,7 @@ from robotpuzzle import buffer
 
 def main() -> None:
     print("Hello from robot puzzle!")
-    circle=robots.CDLL(2)
+    circle=robots.CDLL(3)
     circle.create_robots()
     inspect(circle)
     circle.show_circle()
