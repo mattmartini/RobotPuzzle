@@ -95,12 +95,26 @@ class CDLL:
         """Number of nodes in the list"""
         return self.count
 
+    def run_clock(self):
+        """Run the clock (tic & tock) for each robot"""
+        self.logger.info(f"Run the clock - time: {self.time:04d}")
+        robot = self.head
+        for _ in range(self.count):
+            self.logger.debug(f"{robot.id:03d} - tic")
+            robot.take_action("tic")
+            robot = robot.next
+        for _ in range(self.count):
+            self.logger.debug(f"{robot.id:03d} - tock")
+            robot.take_action("tock")
+            robot = robot.next
+        self.time += 1
+
     def show_circle(self):
         """Print the robot nodes"""
-        temp = self.head
+        robot = self.head
         for _ in range(self.count):
-            print(temp)
-            temp = temp.next
+            print(robot)
+            robot = robot.next
 
     def create_robots(self):
         """Create circle of robots"""
@@ -112,7 +126,6 @@ def test():
     """Test CDLL"""
     # testing now done by pytest
     pass
-
 
 
 def main():
