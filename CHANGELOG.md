@@ -2,40 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.4.0] - 2024-12-06
 
 ### 🚀 Features
 
-- *(docs)* Update make_docs.sh to include changelog
-- *(classes)* Log class instance deletion
-- *(pytest)* Clear scrollback buffer before a series of tests
-- *(puzzle)* Point puzzle at robotpuzzle:main in __init__.py
-- *(puzzle)* Add commands for puzzle (uv run puzzle), bpython startup
-- *(robots)* Add run_clock method
-
-### 🐛 Bug Fixes
-
-- *(node)* [**breaking**] Fix algorythm error caused by typo
+- *(console)* Add rich console for output
+- *(console)* Update class outputs to use console with themes
+- *(circle)* Increase the number of robots in the circle
+- *(panels)* Introduce rich panels to buffer printing
+- *(panels)* Use panels for robot printing
+- *(circle)* Make robots print across via rich columns and panels
+- *(console)* Improve output via console, panels, and columns
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(notes)* Add note for PYTHONSTARTUP
-- *(notes)* Add circle diagram
-- *(version)* Bump patch version
+- *(version)* Bump minor version
 
-### 🚜 Refactor
+### 🧪 Testing
 
-- *(node)* Move actions on tic and tock to new methods
-- *(tock)* Change algorithm for robots
+- *(console)* Update tests to use console with themes
 
 ### 📚 Documentation
 
 - *(api)* Rebuild API docs
 - *(changelog)* Update Changelog
-
-### 🎨 Styling
-
-- *(buffer)* Remove extra linefeed from repr
+- *(changelog)* Update Changelog
+- *(api)* Rebuild API docs
 
 ## [1.3.1] - 2024-12-05
 
