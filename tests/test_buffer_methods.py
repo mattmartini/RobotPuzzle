@@ -11,6 +11,7 @@ def test_get_inputs(new_buffer):
     new_buffer.input["prev"] = 3
     new_buffer.input["next"] = 5
     assert new_buffer.get_inputs() == [3, 5]
+    console.print(new_buffer, style="buffer")
     console.print(new_buffer.buffer_panel(), style="buffer")
 
 
