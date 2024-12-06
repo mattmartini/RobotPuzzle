@@ -4,6 +4,7 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.3.1"
 
+from rich.columns import Columns
 from robotpuzzle.node import Node
 from robotpuzzle import log
 from robotpuzzle.console import console
@@ -109,12 +110,11 @@ class CDLL:
         """Print the robot nodes"""
         robot = self.head
         console.rule("Circle of Robots")
+        robot_circle = []
         for _ in range(self.count):
-            if robot.active is True:
-                console.print(robot.node_panel(), style="active_node")
-            elif robot.active is False:
-                console.print(robot.node_panel(), style="inactive_node")
+            robot_circle.append(robot.node_panel())
             robot = robot.next
+        console.print(Columns(robot_circle))
 
     def create_robots(self):
         """Create circle of robots"""

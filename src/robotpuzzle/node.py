@@ -106,14 +106,20 @@ class Node:
             return f"{ex}"
 
         string = f"[tan]{self.prev.id:03d}[/tan]  "
-        string += f"{vtf(self.active)}     {vtf(self.active)}  "
+        string += f"{vtf(self.active)} "
+        string += f"[bright_white]{self.id:03d}[/bright_white]"
+        string += f" {vtf(self.active)}  "
         string += f"[tan]{self.next.id:03d}[/tan]\n"
         string += f"{vin(self.buffers.output["prev"])}[steel_blue3]<--[/steel_blue3]"
         string += f" {vin(self.buffers.input["prev"])}  "
         string += f"[misty_rose1]{vin(self.data)}[/misty_rose1]"
         string += f"  {vin(self.buffers.input["next"])} "
         string += f"[steel_blue3]-->[/steel_blue3]{vin(self.buffers.output["next"])}"
-        nod_pan = Panel.fit(string, title=f"[bright_white]{self.id:03d}[/bright_white]")
+
+        if self.active is True:
+            nod_pan = Panel.fit(string, style="active_node")
+        elif self.active is False:
+            nod_pan = Panel.fit(string, style="inactive_node")
 
         return nod_pan
 
