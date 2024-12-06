@@ -4,11 +4,10 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.3.1"
 
-from rich import print
+from rich.columns import Columns
 from robotpuzzle.node import Node
 from robotpuzzle import log
-
-# from rich import inspect
+from robotpuzzle.console import console
 
 
 class CDLL:
@@ -23,8 +22,6 @@ class CDLL:
         self.time = 0
         self.logger = log.get_logger()
         self.logger.debug("Create CDLL N=%d", self.num)
-        # TODO create robots on instantiation
-        # self.create_robots()
 
     def __del__(self):
         """Delete Node"""
@@ -97,14 +94,14 @@ class CDLL:
 
     def run_clock(self):
         """Run the clock (tic & tock) for each robot"""
-        self.logger.info(f"Run the clock - time: {self.time:04d}")
+        self.logger.info("Run the clock - time: %04d", self.time)
         robot = self.head
         for _ in range(self.count):
-            self.logger.debug(f"{robot.id:03d} - tic")
+            self.logger.debug("%03d - tic", robot.id)
             robot.take_action("tic")
             robot = robot.next
         for _ in range(self.count):
-            self.logger.debug(f"{robot.id:03d} - tock")
+            self.logger.debug("%03d - tock", robot.id)
             robot.take_action("tock")
             robot = robot.next
         self.time += 1
@@ -112,9 +109,12 @@ class CDLL:
     def show_circle(self):
         """Print the robot nodes"""
         robot = self.head
+        console.rule("Circle of Robots")
+        robot_circle = []
         for _ in range(self.count):
-            print(robot)
+            robot_circle.append(robot.node_panel())
             robot = robot.next
+        console.print(Columns(robot_circle))
 
     def create_robots(self):
         """Create circle of robots"""
@@ -131,7 +131,7 @@ def test():
 def main():
     """Robots Main"""
 
-    print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
+    console.print("Hello from [bold magenta]robotpuzzle![/bold magenta]")
     robots = CDLL(3)
     robots.create_robots()
     robots.logger.info("---------------- New Main Run ----------------")

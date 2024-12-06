@@ -4,6 +4,7 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.2.2"
 
+from rich.panel import Panel
 from robotpuzzle import log
 
 
@@ -42,6 +43,21 @@ class Buffer:
         string += " └───────────────────┘"
 
         return string
+
+    def buffer_panel(self):
+        """Panel of the Buffer"""
+
+        def vin(ex, fal="_"):
+            """Return string based on expression"""
+            if ex is None:
+                return str(fal)
+            return f"{ex}"
+
+        string = f" In:[{vin(self.input["prev"])},{vin(self.input["next"])}] "
+        string += f"Out:[{vin(self.output["prev"])},{vin(self.output["next"])}]"
+        buff_pan = Panel.fit(string)
+
+        return buff_pan
 
     def get_inputs(self):
         """Input Buffer getter"""

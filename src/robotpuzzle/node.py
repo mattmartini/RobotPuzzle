@@ -4,9 +4,10 @@ __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
 __version__ = "1.3.1"
 
-from rich import print
+from rich.panel import Panel
 from robotpuzzle import log
 from robotpuzzle import buffer
+from robotpuzzle.console import console
 
 
 class Node:
@@ -89,6 +90,39 @@ class Node:
 
         return string
 
+    def node_panel(self):
+        """Panel of the Node"""
+
+        def vtf(ex, fal="-", tru="+"):
+            """Return string based on expression"""
+            if ex == 0:
+                return str(fal)
+            return str(tru)
+
+        def vin(ex, fal="_"):
+            """Return string based on expression"""
+            if ex is None:
+                return str(fal)
+            return f"{ex}"
+
+        string = f"[tan]{self.prev.id:03d}[/tan]  "
+        string += f"{vtf(self.active)} "
+        string += f"[bright_white]{self.id:03d}[/bright_white]"
+        string += f" {vtf(self.active)}  "
+        string += f"[tan]{self.next.id:03d}[/tan]\n"
+        string += f"{vin(self.buffers.output["prev"])}[steel_blue3]<--[/steel_blue3]"
+        string += f" {vin(self.buffers.input["prev"])}  "
+        string += f"[misty_rose1]{vin(self.data)}[/misty_rose1]"
+        string += f"  {vin(self.buffers.input["next"])} "
+        string += f"[steel_blue3]-->[/steel_blue3]{vin(self.buffers.output["next"])}"
+
+        if self.active is True:
+            nod_pan = Panel.fit(string, style="active_node")
+        elif self.active is False:
+            nod_pan = Panel.fit(string, style="inactive_node")
+
+        return nod_pan
+
     def flush_output_buffers(self):
         """Send data to neighbors, clear outgoing buffers"""
         # FIXME want to clear inputs in a way that makes them visible
@@ -116,8 +150,8 @@ class Node:
 
     def turn_inside_out_and_explode(self):
         """Explode"""
-        explosion = f"{self.id:03d}: [red]Boom![/red]"
-        print(explosion)
+        explosion = f"{self.id:03d}: Boom!"
+        console.print(explosion, style="explosion")
         self.logger.info("%03d: Boom!", self.id)
         return explosion
 
@@ -173,7 +207,7 @@ class Node:
 
             if info == [1, 1]:
                 self.turn_inside_out_and_explode()
-                self.data = 'X'
+                self.data = "X"
             return info
 
     def take_action(self, time=""):
