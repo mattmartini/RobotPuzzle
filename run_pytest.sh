@@ -15,6 +15,23 @@ iterm_clear_buffer() {
   echo -e "\033]1337;ClearScrollback\x07"
 }
 
+usage() {
+  cat <<EOHelp
+  run_pytest <options>
+    note: options need an argument
+    --output   | -o  1   Show stdout and stderr of tests
+    --verbose  | -v  1   Verbose output
+    --cov      | -c  1   Produce a coverage report
+    --html     | -h  1   Test output in html format
+    --pretty   | -p  0   Turn off pretty reporting
+    --random   | -r  0   Don't randomize order
+    --fixtures | -f  1   Only show active fixures
+    --setup    | -s  1   Only show pytest setup
+    --help 1             This help message
+EOHelp
+exit 1
+}
+
 test_cmd=''
 
 make_test_cmd() {
@@ -27,11 +44,16 @@ make_test_cmd() {
   config+=( [o]='output'   [output]=0 )
   config+=( [f]='fixtures' [fixtures]=0 )
   config+=( [s]='setup'    [setup]=0 )
+  config+=(                [help]=0 )
 
   arg_parse "$@"
 
   local cmd='python -m pytest '
   local args=''
+
+  if [[ ${config[help]} != 0 ]]; then
+    usage
+  fi
 
   if [[ ${config[cov]} != 0 ]]; then
     args+=' --cov=src --cov-branch --cov-report html'
