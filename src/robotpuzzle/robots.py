@@ -100,6 +100,7 @@ class CDLL:
             self.logger.debug("%03d - tic", robot.id)
             robot.take_action("tic")
             robot = robot.next
+        self.show_circle()
         for _ in range(self.count):
             self.logger.debug("%03d - tock", robot.id)
             robot.take_action("tock")
