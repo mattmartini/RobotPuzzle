@@ -77,14 +77,16 @@ This project creates a simulator for the robot puzzle to test out
 algorithms for the puzzle's solution. There are classes for the robots
 (nodes) and the circle of robots (Circular Doubly Linked List).
 
-Each unit of time takes two discrete parts a tic and a tock. During the
-tic phase all of the robots send a 0 or 1 (or nothing) to one or both of
-its neighbors. Then on the tock it receives what its neighbors sent it
+Each unit of time takes two discrete parts a `tic` and a `tock`. During the
+`tic` phase all of the robots send a 0 or 1 (or nothing) to one or both of
+its neighbors. Then on the `tock` it receives what its neighbors sent it
 and decides what to do in the next round. It has a 1 bit data register
 that can be changed once each clock cycle.
 
 ### Robots
-Each robot (node) has an `id`, pointer to its `prev`ious and `next` neighbor, an `active` flag, and `buffers` for incoming and outgoing data.
+Each robot (node) has an `id`, pointer to its `prev`ious and `next`
+neighbor, an `active` flag, a (O)1 bid `data` register, and `buffers`
+for incoming and outgoing data.
 
 ### Legend
 To help visualize what is going on with the robots, each robot is represented by a panel as follows.
@@ -105,18 +107,22 @@ Given that there are always 2^N Robots, we will always have a starting
 robot (head) and its mirror (tail) that is halfway around the circle.
 
 There are two obvious ways of starting (to my mind): 
-    1) On "Go" the head robot sends a 0 or 1 to the next node, which in
+1. On "Go" the head robot sends a 0 or 1 to the next node, which in
        turn sends this same datum to its next node, ... Eventually, the head
        node will receive data on its prev node input buffer. At this
        point it will realize that it is "head" and know that all of the
        other robots are now active.
-    2) On "Go" the head robot sends a 0 or 1 to both of its neighbors
+2. On "Go" the head robot sends a 0 or 1 to both of its neighbors
        activating them. Each of these robots then passes the datum on to
        its respective neighbor (head's next sends to it's next,...).
        Upon receiving data from both its prev and next neighbors at the
        same time the robot will realize that it is "tail" and also that
        all of the robots are now active.
 Not sure which of these will be more helpful.
+
+All robots run the same code. Any can be "head" (or "tail") as the "Go"
+robot is chosen at random. The "head" robot will not "remember" that it
+is "head," unless this info is stored in `data`
 
 It is interesting to note that while each robot can only remember (O)1
 bit there are actually there possibilities of what it can send its
