@@ -63,3 +63,25 @@ Use getters and setters
 ╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯
 ```
 
+# TODO
+refactor with better names  node-robot  CDLL-circle
+advance_clock
+
+robots to circle
+
+max_pre_time
+
+tupples for algo
+```
+(_,_)
+(0,_)
+(_,0)
+(1,_)
+(_,1)
+(0,0)
+(0,1)
+(1,0)
+(1,1)
+```
+
+
