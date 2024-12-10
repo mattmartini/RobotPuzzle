@@ -3,7 +3,7 @@
 import pytest
 from robotpuzzle.buffer import Buffer
 from robotpuzzle.node import Node
-from robotpuzzle.robots import CDLL
+from robotpuzzle.circles import CDLL
 
 
 @pytest.fixture(name="new_buffer")

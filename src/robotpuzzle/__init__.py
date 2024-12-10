@@ -5,13 +5,13 @@ __version__ = "1.4.0"
 
 from rich import inspect
 from robotpuzzle import node
-from robotpuzzle import robots
+from robotpuzzle import circles
 from robotpuzzle import buffer
 
 
 def main() -> None:
     print("Hello from robot puzzle!")
-    circle=robots.CDLL(2)
+    circle=circles.CDLL(2)
     circle.create_robots()
     inspect(circle)
     circle.show_circle()
