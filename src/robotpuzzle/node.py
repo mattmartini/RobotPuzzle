@@ -94,27 +94,33 @@ class Node:
         """Panel of the Node"""
 
         def vtf(ex, fal="-", tru="+"):
-            """Return string based on expression"""
+            """Return string based on true/false of expression"""
             if ex == 0:
                 return str(fal)
             return str(tru)
 
         def vin(ex, fal="_"):
-            """Return string based on expression"""
+            """Return string based on expression is None"""
             if ex is None:
                 return str(fal)
             return f"{ex}"
+
+        def vbk(ex, fal="_"):
+            """Return color bkg for non None"""
+            if ex is None:
+                return str(fal)
+            return f"[orange1 on grey35]{ex}[/orange1 on grey35]"
 
         string = f"[tan]{self.prev.id:03d}[/tan]  "
         string += f"{vtf(self.active)} "
         string += f"[bright_white]{self.id:03d}[/bright_white]"
         string += f" {vtf(self.active)}  "
         string += f"[tan]{self.next.id:03d}[/tan]\n"
-        string += f"{vin(self.buffers.output["prev"])}[steel_blue3]<--[/steel_blue3]"
-        string += f" {vin(self.buffers.input["prev"])}  "
+        string += f"{vbk(self.buffers.output["prev"])}[steel_blue3]<--[/steel_blue3]"
+        string += f" {vbk(self.buffers.input["prev"])}  "
         string += f"[misty_rose1]{vin(self.data)}[/misty_rose1]"
-        string += f"  {vin(self.buffers.input["next"])} "
-        string += f"[steel_blue3]-->[/steel_blue3]{vin(self.buffers.output["next"])}"
+        string += f"  {vbk(self.buffers.input["next"])} "
+        string += f"[steel_blue3]-->[/steel_blue3]{vbk(self.buffers.output["next"])}"
 
         if self.active is True:
             nod_pan = Panel.fit(string, style="active_node")

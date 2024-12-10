@@ -11,7 +11,7 @@ from robotpuzzle import buffer
 
 def main() -> None:
     print("Hello from robot puzzle!")
-    circle=robots.CDLL(3)
+    circle=robots.CDLL(2)
     circle.create_robots()
     inspect(circle)
     circle.show_circle()
@@ -23,6 +23,6 @@ def main() -> None:
     circle.head.activate()
     circle.head.buffers.set_outputs(0,0)
 
-    for seconds in range(16):
+    for seconds in range(6):
         circle.run_clock()
         circle.show_circle()
