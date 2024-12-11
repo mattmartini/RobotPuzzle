@@ -17,9 +17,9 @@ def test_nodes(multi_node):
 
     def time_click(robots):
         for robot in robots:
-            robot.take_action("tic")
+            robot.advance_clock("tic")
         for robot in robots:
-            in_buff = robot.take_action("tock")
+            in_buff = robot.advance_clock("tock")
             print(in_buff)
         show_robots(robots)
 

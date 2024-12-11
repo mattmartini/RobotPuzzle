@@ -82,25 +82,25 @@ def test_read_input_buffers(new_node):
 
 
 @pytest.mark.node
-def test_take_action_no_time(new_node):
+def test_advance_clock(new_node):
     """Test take action neither tic nor tock"""
     with pytest.raises(ValueError) as e:
-        new_node.take_action()
+        new_node.advance_clock()
     assert "Time is either tic or tock" in str(e.value)
 
 
 @pytest.mark.node
-def test_take_action_tic(new_node):
+def test_advance_clock(new_node):
     """Test take action tic"""
     assert new_node.active == 0
-    returned = new_node.take_action("tic")
+    returned = new_node.advance_clock("tic")
     assert returned is None
     new_node.activate()
     new_node.buffers.output["prev"] = 4
     new_node.buffers.output["next"] = 5
     assert new_node.buffers.output["prev"] == 4
     assert new_node.buffers.output["next"] == 5
-    returned = new_node.take_action("tic")
+    returned = new_node.advance_clock("tic")
     assert new_node.buffers.input["prev"] == 5
     assert new_node.buffers.input["next"] == 4
     assert new_node.buffers.output["prev"] is None
@@ -108,19 +108,19 @@ def test_take_action_tic(new_node):
 
 
 @pytest.mark.node
-def test_take_action_tock(new_node):
+def test_advance_clock(new_node):
     """Test take action tock"""
     assert new_node.active == 0
-    returned = new_node.take_action("tock")
+    returned = new_node.advance_clock("tock")
     assert returned is None
     assert new_node.buffers.input["prev"] is None
     assert new_node.buffers.input["next"] is None
     new_node.buffers.input["prev"] = 1
     new_node.buffers.input["next"] = 5
-    returned = new_node.take_action("tock")
+    returned = new_node.advance_clock("tock")
     assert new_node.active == 1
     assert new_node.buffers.input["prev"] is None
     assert new_node.buffers.input["next"] is None
     new_node.buffers.input["prev"] = 1
     new_node.buffers.input["next"] = 1
-    returned = new_node.take_action("tock")
+    returned = new_node.advance_clock("tock")

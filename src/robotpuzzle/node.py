@@ -216,7 +216,7 @@ class Node:
                 self.data = "X"
             return info
 
-    def take_action(self, time=""):
+    def advance_clock(self, time=""):
         """Action taken this tic or tock"""
         if time == "tic":
             self.time_tic()

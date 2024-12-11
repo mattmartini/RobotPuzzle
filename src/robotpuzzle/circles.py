@@ -98,12 +98,12 @@ class CDLL:
         robot = self.head
         for _ in range(self.count):
             self.logger.debug("%03d - tic", robot.id)
-            robot.take_action("tic")
+            robot.advance_clock("tic")
             robot = robot.next
         self.show_circle()
         for _ in range(self.count):
             self.logger.debug("%03d - tock", robot.id)
-            robot.take_action("tock")
+            robot.advance_clock("tock")
             robot = robot.next
         self.time += 1
 
