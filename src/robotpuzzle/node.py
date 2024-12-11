@@ -124,16 +124,13 @@ class Node:
 
         if self.active is True:
             nod_pan = Panel.fit(string, style="active_node")
-        elif self.active is False:
+        else:  # self.active is False
             nod_pan = Panel.fit(string, style="inactive_node")
 
         return nod_pan
 
     def flush_output_buffers(self):
         """Send data to neighbors, clear outgoing buffers"""
-        # FIXME want to clear inputs in a way that makes them visible
-        # self.buffers.input["prev"] = None
-        # self.buffers.input["next"] = None
         self.logger.debug(
             "%03d:    %03d <-- %s", self.id, self.prev.id, self.buffers.output["prev"]
         )
@@ -148,7 +145,7 @@ class Node:
 
     def read_input_buffers(self):
         """Read and clear input buffers"""
-        cur_buffers = [self.buffers.input["prev"], self.buffers.input["next"]]
+        cur_buffers = (self.buffers.input["prev"], self.buffers.input["next"])
         self.buffers.input["prev"] = None
         self.buffers.input["next"] = None
         self.logger.debug("%03d: input buffers %s", self.id, cur_buffers)
@@ -172,49 +169,63 @@ class Node:
     def time_tock(self):
         """Action taken on clock tock"""
         self.logger.debug("%03d: tock", self.id)
-        info = self.read_input_buffers()
+        buffs = self.read_input_buffers()
         if self.active is False:
-            if info == [None, None]:
+            if buffs == (None, None):
                 self.logger.debug("%03d: tock - noop", self.id)
-                return
+                return buffs
             self.activate()
-            if info[0] == 0:
-                self.data = 1
-                self.buffers.output["next"] = 0
-            if info[0] == 1:
-                self.data = 0
-                self.buffers.output["next"] = 1
-            if info[1] == 0:
-                self.data = 1
-                self.buffers.output["prev"] = 0
-            if info[1] == 1:
-                self.data = 0
-                self.buffers.output["prev"] = 1
-            # if info[0] is not None:
-            #     self.buffers.output["next"] = 1
-            # if info[1] is not None:
-            #     self.buffers.output["prev"] = 1
-            return
+            match buffs:
+                case (p, n) if p == 0:
+                    self.data = 1
+                    self.buffers.output["next"] = 0
+                case (p, n) if p == 1:
+                    self.data = 0
+                    self.buffers.output["next"] = 1
+                case (p, n) if n == 0:
+                    self.data = 1
+                    self.buffers.output["prev"] = 0
+                case (p, n) if n == 1:
+                    self.data = 0
+                    self.buffers.output["prev"] = 1
+            return buffs
         else:
-            # TODO set data and output+buffers
+            # TODO
             #  decide on actions: explode or pass data
-            if info[0] == 0:
-                self.buffers.output["next"] = self.data
-                self.data = 0
-            if info[0] == 1:
-                self.buffers.output["next"] = self.data
-                self.data = 1
-            if info[1] == 0:
-                self.buffers.output["prev"] = self.data
-                self.data = 0
-            if info[1] == 1:
-                self.buffers.output["prev"] = self.data
-                self.data = 1
-
-            if info == [1, 1]:
-                self.turn_inside_out_and_explode()
-                self.data = "X"
-            return info
+            match buffs:
+                case (None, None):
+                    pass
+                case (0, None):
+                    self.buffers.output["next"] = self.data
+                    self.data = 0
+                case (None, 0):
+                    self.buffers.output["prev"] = self.data
+                    self.data = 0
+                case (1, None):
+                    self.buffers.output["next"] = self.data
+                    self.data = 1
+                case (None, 1):
+                    self.buffers.output["prev"] = self.data
+                    self.data = 1
+                case (0, 0):
+                    self.buffers.output["next"] = self.data
+                    self.data = 0
+                    self.buffers.output["prev"] = self.data
+                    self.data = 0
+                case (0, 1):
+                    self.buffers.output["next"] = self.data
+                    self.data = 0
+                    self.buffers.output["prev"] = self.data
+                    self.data = 1
+                case (1, 0):
+                    self.buffers.output["next"] = self.data
+                    self.data = 1
+                    self.buffers.output["prev"] = self.data
+                    self.data = 0
+                case (1, 1):
+                    self.turn_inside_out_and_explode()
+                    self.data = "X"
+            return buffs
 
     def advance_clock(self, time=""):
         """Action taken this tic or tock"""
