@@ -30,7 +30,7 @@ replace = "{new_version}"
 
 [[tool.bumpversion.files]]
 filename = 'tests/__init__.py'
-search = "__date__ = \"\\d{{4}}-\\d{{2}}-\\d{{2}}\""
+search = "__date__ = '\\d{{4}}-\\d{{2}}-\\d{{2}}'"
 replace = "__date__ = '{now:%Y-%m-%d}'"
 regex = true
 
@@ -39,7 +39,7 @@ filename = 'tests/__init__.py'
 
 [[tool.bumpversion.files]]
 filename = 'src/robotpuzzle/__init__.py'
-search = "__date__ = \"\\d{{4}}-\\d{{2}}-\\d{{2}}\""
+search = "__date__ = '\\d{{4}}-\\d{{2}}-\\d{{2}}'"
 replace = "__date__ = '{now:%Y-%m-%d}'"
 regex = true
 
@@ -50,5 +50,14 @@ filename = 'src/robotpuzzle/__init__.py'
 filename = 'src/robotpuzzle/node.py'
 
 [[tool.bumpversion.files]]
-filename = 'src/robotpuzzle/robots.py'
+filename = 'src/robotpuzzle/circles.py'
+
+[[tool.bumpversion.files]]
+filename = 'src/robotpuzzle/buffer.py'
+
+[[tool.bumpversion.files]]
+filename = 'src/robotpuzzle/console.py'
+
+[[tool.bumpversion.files]]
+filename = 'src/robotpuzzle/log.py'
 
