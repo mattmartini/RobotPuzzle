@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2024-12-11
+
+### 🚀 Features
+
+- *(circle)* Show status of robots in between tic and tock
+- *(buffers)* Make buffers standout more
+
+### ⚙️ Miscellaneous Tasks
+
+- *(notes)* Update circle diagram
+- *(ripgrep)* Don't search docs/ via .ignore
+- *(version)* Bump patch version
+
+### 🚜 Refactor
+
+- *(circle)* Rename robots.py to circles.py. Fix references
+- *(clock)* [**breaking**] Change take_action to advance_clock
+- *(puzzle)* Refactor puzzle main
+
+### 📚 Documentation
+
+- *(changelog)* Update Changelog
+- *(pytest)* Document run_pytest with help message
+- *(readme)* Add to readme.md docs
+- *(readme)* Add descriptions
+
+### 🚧 Build
+
+- *(bump)* Fix bump-my-version rc file date update
+
 ## [1.4.0] - 2024-12-06
 
 ### 🚀 Features
