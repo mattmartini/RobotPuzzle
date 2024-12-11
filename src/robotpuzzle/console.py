@@ -2,7 +2,7 @@
 
 __author__ = "Matt Martini"
 __email__ = "matt.martini@imaginarywave.com"
-__version__ = "1.4.1"
+__version__ = "1.4.2"
 
 from rich.console import Console
 from rich.theme import Theme

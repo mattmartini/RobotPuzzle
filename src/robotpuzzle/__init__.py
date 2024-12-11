@@ -1,7 +1,7 @@
 """RobotPuzzle Init"""
 
 __date__ = '2024-12-10'
-__version__ = "1.4.1"
+__version__ = "1.4.2"
 
 from rich import inspect
 from robotpuzzle import circles
