@@ -98,7 +98,7 @@ To help visualize what is going on with the robots, each robot is represented by
      ╰─────────────────╯
 ```
 In the first line are shown:
- prev   active   node number    active   next  
+ prev_node_number   active   node_number    active   next_node_number
 the following line shows:  prev_out_buf  <-- prev_in_buf   data  next_in_buf --> next_out_buf
 
 
