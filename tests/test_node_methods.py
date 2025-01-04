@@ -90,7 +90,7 @@ def test_advance_clock(new_node):
 
 
 @pytest.mark.node
-def test_advance_clock(new_node):
+def test_advance_clock_tic(new_node):
     """Test take action tic"""
     assert new_node.active == 0
     returned = new_node.advance_clock("tic")
@@ -108,7 +108,7 @@ def test_advance_clock(new_node):
 
 
 @pytest.mark.node
-def test_advance_clock(new_node):
+def test_advance_clock_tock(new_node):
     """Test take action tock"""
     assert new_node.active == 0
     returned = new_node.advance_clock("tock")
