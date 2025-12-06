@@ -135,8 +135,8 @@ neighbor on each clock cycle: 0, 1, or Null (None).
 The version schema for this project is major.minor.patch (ie 1.2.3)
 `bump-my-version` is used to manage the changes.
 ```
-bump-my version show-bump
-bump-my version bump patch
-bump-my version bump minor
-bump-my version bump major
+bump-my-version show-bump
+bump-my-version bump patch
+bump-my-version bump minor
+bump-my-version bump major
 ```
