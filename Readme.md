@@ -98,8 +98,8 @@ To help visualize what is going on with the robots, each robot is represented by
      ╰─────────────────╯
 ```
 In the first line are shown:
- prev_node_number   active   node_number    active   next_node_number
-the following line shows:  prev_out_buf  <-- prev_in_buf   data  next_in_buf --> next_out_buf
+ `prev_node_number   active   node_number    active   next_node_number`  
+the following line shows:  `prev_out_buf  <-- prev_in_buf   data  next_in_buf --> next_out_buf`
 
 
 ## Solution
@@ -125,7 +125,7 @@ robot is chosen at random. The "head" robot will not "remember" that it
 is "head," unless this info is stored in `data`
 
 It is interesting to note that while each robot can only remember (O)1
-bit there are actually there possibilities of what it can send its
+bit there are actually three possibilities of what it can send its
 neighbor on each clock cycle: 0, 1, or Null (None).
 
 ### Details
