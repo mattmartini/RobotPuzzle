@@ -15,13 +15,14 @@ class CDLL:
 
     def __init__(self, num=0):
         """Initalize CDLL"""
+        self.logger = log.get_logger()
+        self.logger.debug("Create CDLL N=%d", num)
         self.num = num
         self.robots_needed = 2**self.num
         self.count = 0
         self.head = None
         self.time = 0
-        self.logger = log.get_logger()
-        self.logger.debug("Create CDLL N=%d", self.num)
+        self.logger.debug("Create CDLL N=%d - complete", num)
 
     def __del__(self):
         """Delete Node"""
@@ -44,11 +45,13 @@ class CDLL:
 
     def append(self, data=None):
         """Append a node"""
+        self.logger.info("Append a Node %03d", self.count)
         self.insert(self.count, data)
-        self.logger.info("Append a Node")
+        self.logger.debug("Append a Node - complete")
 
     def insert(self, index, data=None):
         """Insert a node"""
+        self.logger.info("Insert a Node %03d", index)
         if (index > self.count) | (index < 0):
             raise ValueError(f"Index out of range: {index}, size: {self.count}")
 
@@ -75,7 +78,7 @@ class CDLL:
         if index == 0:
             self.head = self.head.prev
         self.count += 1
-        self.logger.info("Insert a Node")
+        self.logger.debug("Insert a Node - complete")
         return
 
     def get(self, index):
@@ -94,6 +97,7 @@ class CDLL:
 
     def run_clock(self):
         """Run the clock (tic & tock) for each robot"""
+        console.rule(style="magenta")
         self.logger.info("Run the clock - time: %04d", self.time)
         robot = self.head
         for _ in range(self.count):
@@ -119,6 +123,7 @@ class CDLL:
 
     def create_robots(self):
         """Create circle of robots"""
+        self.logger.info("Create Circle of %d Robots", self.robots_needed)
         for _ in range(self.robots_needed):
             self.append()
 

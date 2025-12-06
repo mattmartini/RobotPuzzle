@@ -23,15 +23,16 @@ class Node:
     def __init__(self, data=None):
         """Initalize Node"""
         self.id = Node.count
+        self.logger = log.get_logger()
+        self.logger.info("Create node %03d", self.id)
         Node.inc_count()
         self._active = False
         self.data = data
         self.prev = self
         self.next = self
         self.buffers = buffer.Buffer()
-        self.logger = log.get_logger()
 
-        self.logger.info("Create node %03d", self.id)
+        self.logger.info("Create node %03d - complete", self.id)
 
     def __del__(self):
         """Delete Node"""
@@ -146,9 +147,9 @@ class Node:
     def read_input_buffers(self):
         """Read and clear input buffers"""
         cur_buffers = (self.buffers.input["prev"], self.buffers.input["next"])
+        self.logger.debug("%03d: input buffers %s", self.id, cur_buffers)
         self.buffers.input["prev"] = None
         self.buffers.input["next"] = None
-        self.logger.debug("%03d: input buffers %s", self.id, cur_buffers)
         return cur_buffers
 
     def turn_inside_out_and_explode(self):
