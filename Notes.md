@@ -84,4 +84,9 @@ tupples for algo
 (1,1)
 ```
 
+# run the puzzle application (runs src/robotpuzzle/__init__.py)
+`uv run puzzle`
+
+# watch src and re-run puzzle application
+`fd . src/robotpuzzle tests | entr uv run puzzle`
 
