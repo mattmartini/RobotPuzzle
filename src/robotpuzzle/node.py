@@ -148,8 +148,7 @@ class Node:
         """Read and clear input buffers"""
         cur_buffers = (self.buffers.input["prev"], self.buffers.input["next"])
         self.logger.debug("%03d: input buffers %s", self.id, cur_buffers)
-        self.buffers.input["prev"] = None
-        self.buffers.input["next"] = None
+        self.buffers.set_inputs(None, None)
         return cur_buffers
 
     def turn_inside_out_and_explode(self):
@@ -176,71 +175,45 @@ class Node:
                 self.logger.debug("%03d: tock - noop", self.id)
                 return buffs
             self.activate()
-            match buffs:
-                case (0, None):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (None, 0):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (1, None):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (None, 1):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (0, 0):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (0, 1):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (1, 0):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (1, 1):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                    # self.turn_inside_out_and_explode()
-                    # self.data = "X"
-                case _:
-                    self.logger.error("Bad input buffers on activation in Node %03d", self.id)
-            return buffs
-        else:
-            # TODO
-            #  decide on actions: explode or pass data
-            match buffs:
-                case (None, None):
-                    pass
-                case (0, None):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (None, 0):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (1, None):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (None, 1):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (0, 0):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (0, 1):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (1, 0):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                case (1, 1):
-                    self.buffers.set_outputs(None, None)
-                    self.data = None
-                    # self.turn_inside_out_and_explode()
-                    # self.data = "X"
-                case _:
-                    self.logger.error("Bad input buffers in Node %03d", self.id)
-            return buffs
+            self.data = 0
+        self.decide_action(buffs)
+        return buffs
+
+    def decide_action(self,buffs):
+        """Decide on action to take"""
+        self.logger.debug("%03d: decide action", self.id)
+        match buffs:
+            case (None, None):
+                pass
+            case (0, None):
+                self.buffers.set_outputs(None, 0)
+                # self.data = None
+            case (None, 0):
+                self.buffers.set_outputs(0, None)
+                # self.data = None
+            case (1, None):
+                self.buffers.set_outputs(1, 1)
+                # self.data = None
+            case (None, 1):
+                self.buffers.set_outputs(1, None)
+                # self.data = None
+            case (0, 0):
+                self.buffers.set_outputs(0, 0)
+                # self.data = None
+            case (0, 1):
+                self.buffers.set_outputs(1, 0)
+                # self.data = None
+            case (1, 0):
+                self.buffers.set_outputs(0, 1)
+                # self.data = None
+            case (1, 1) if self.data == 1:
+                self.turn_inside_out_and_explode()
+                self.data = "x"
+            case (1, 1):
+                self.buffers.set_outputs(1, 1)
+                self.data = 1
+            case _:
+                self.logger.error("Bad input buffers in Node %03d", self.id)
 
     def advance_clock(self, time=""):
         """Action taken this tic or tock"""
