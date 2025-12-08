@@ -56,3 +56,5 @@ def test_initial_buffers(new_node):
     assert new_node.buffers.input["next"] is None
     assert new_node.buffers.output["prev"] is None
     assert new_node.buffers.output["next"] is None
+    assert new_node.buffers.get_inputs() == [None, None]
+    assert new_node.buffers.get_outputs() == [None, None]
