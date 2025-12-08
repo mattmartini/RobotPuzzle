@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚜 Refactor
+
+- *(logging)* Move log statements to beginning of methods
+- *(node)* Use set_outputs method
+
+### 🧪 Testing
+
+- *(node)* Differentiate tic from toc
+
+### 📚 Documentation
+
+- *(readme)* Clarification of legend
+- *(notes)* How to run the puzzle app (also via watch & run)
+- *(readme)* Fix typo
+
+### 🎨 Styling
+
+- *(readme)* Clean up documentation
+
+### 🚧 Build
+
+- *(cliff)* Fix error in default cliff.toml
+
+### Other
+
+- *(other)* Merge branch 'trial01'
+
+* trial01:
+  refactor(node): Use set_outputs method
+
+## [1.4.2] - 2024-12-11
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version 1.4.1 → 1.4.2
+
+### 🚜 Refactor
+
+- *(node)* Use match case to decide on actions
+
+### 📚 Documentation
+
+- *(api)* Rebuild API docs
+- *(changelog)* Update Changelog
+- Add doc for circles.py
+
+### 🚧 Build
+
+- *(bump)* Fix bump-my-version rc file git options
+
 ## [1.4.1] - 2024-12-11
 
 ### 🚀 Features
@@ -59,6 +111,13 @@ All notable changes to this project will be documented in this file.
 - *(changelog)* Update Changelog
 - *(api)* Rebuild API docs
 
+### Other
+
+- *(other)* Merge branch 'main' of gitvault.home.arpa:robotpuzz
+
+* 'main' of gitvault.home.arpa:robotpuzz:
+  docs(changelog): Update Changelog
+
 ## [1.3.1] - 2024-12-05
 
 ### 🚀 Features
@@ -78,6 +137,16 @@ All notable changes to this project will be documented in this file.
 
 - *(notes)* Add note for PYTHONSTARTUP
 - *(notes)* Add circle diagram
+- Merge branch 'algorithm'
+
+* algorithm:
+  refactor(tock): Change algorithm for robots
+  feat(robots): Add run_clock method
+  feat(puzzle): Add commands for puzzle (uv run puzzle), bpython startup
+  chore(notes): Add circle diagram
+  chore(notes): Add note for PYTHONSTARTUP
+  feat(puzzle): Point puzzle at robotpuzzle:main in __init__.py
+  refactor(node): Move actions on tic and tock to new methods
 - *(version)* Bump patch version
 
 ### 🚜 Refactor
@@ -232,6 +301,33 @@ All notable changes to this project will be documented in this file.
 - *(backend)* Try other backends hatch, flit
 - *(pytest)* Add/remove pythonpath.  Seems not needed
 
+### Other
+
+- *(other)* Merge branch 'testing'
+
+* testing: (21 commits)
+  refactor(logging): Move to pkgutil from os path
+  chore(logs): Send logfile to logs dir
+  chore(logs): Create logs dir.  Git to ignore contents
+  fix(package): Fix paths to include package
+  build(pytest): Add/remove pythonpath.  Seems not needed
+  fix(paths): Remove debugging for paths
+  fix(package): Fix paths to include package
+  chore(uv): Remove textual module
+  style(quoting): Use proper quoting
+  chore(config): Add configs for pylint, flake8, isort
+  build(backend): Try other backends hatch, flit
+  build(uv): Add setuptools build system
+  feat(path): Use sys.path to show current path
+  build(pytest): Ignore scratch dir
+  test: Create tests for node and robots
+  docs: Clean up comments as per pylint
+  refactor(log): Refactor per pylint
+  docs: Add module docstring
+  chore(uv): Add bpython
+  chore(uv): Add pylint
+  ...
+
 ## [1.1.0] - 2024-11-25
 
 ### 🚀 Features
@@ -256,6 +352,23 @@ All notable changes to this project will be documented in this file.
 ### 📚 Documentation
 
 - *(changelog)* Update Changelog
+
+### Other
+
+- *(other)* Merge branch 'logging'
+
+Create a logging system
+
+* logging:
+  chore(logging): Remove non-json config
+  feat(logging): Reconfigure logging config
+  refactor(logging): Remove extraneous code
+  feat(logging)!: Move logger definition to log.py
+  feat(logging): Move logging config to jason file
+  feat(logging): Use in-line json for logging config
+  feat(logging): Convert to config file for logging
+  feat(logging): Move logging config to robots.py
+  feat(logging): Add simple logging to Node
 
 ## [1.0.5] - 2024-11-24
 
@@ -289,6 +402,13 @@ All notable changes to this project will be documented in this file.
 
 - *(uv)* Move pdoc module to dev requirements
 
+### Other
+
+- *(other)* Merge branch 'docs'
+
+* docs:
+  build(uv): Move pdoc module to dev requirements
+
 ## [1.0.3] - 2024-11-22
 
 ### 🚀 Features
@@ -296,6 +416,7 @@ All notable changes to this project will be documented in this file.
 - *(node)* Add methods to read and flush buffers
 - *(node)* Add activate/deactivate methods
 - *(node)* Action taken on tic or tock time ticks
+- Feat((robots)): Implementation of Circular doubly linked list
 
 ### 🧪 Testing
 

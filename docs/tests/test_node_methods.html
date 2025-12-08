@@ -72,6 +72,12 @@
             <li>
                     <a class="function" href="#test_advance_clock">test_advance_clock</a>
             </li>
+            <li>
+                    <a class="function" href="#test_advance_clock_tic">test_advance_clock_tic</a>
+            </li>
+            <li>
+                    <a class="function" href="#test_advance_clock_tock">test_advance_clock_tock</a>
+            </li>
     </ul>
 
 
@@ -187,7 +193,7 @@ tests<wbr>.test_node_methods    </h1>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
 </span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">node</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="k">def</span> <span class="nf">test_advance_clock</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="k">def</span> <span class="nf">test_advance_clock_tic</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
 </span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test take action tic&quot;&quot;&quot;</span>
 </span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span>
 </span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tic&quot;</span><span class="p">)</span>
@@ -205,7 +211,7 @@ tests<wbr>.test_node_methods    </h1>
 </span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
 </span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
 </span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">node</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="k">def</span> <span class="nf">test_advance_clock</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="k">def</span> <span class="nf">test_advance_clock_tock</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
 </span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test take action tock&quot;&quot;&quot;</span>
 </span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span>
 </span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
@@ -440,23 +446,85 @@ tests<wbr>.test_node_methods    </h1>
 
     </div>
     <a class="headerlink" href="#test_advance_clock"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="test_advance_clock-111"><a href="#test_advance_clock-111"><span class="linenos">111</span></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">node</span>
-</span><span id="test_advance_clock-112"><a href="#test_advance_clock-112"><span class="linenos">112</span></a><span class="k">def</span> <span class="nf">test_advance_clock</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
-</span><span id="test_advance_clock-113"><a href="#test_advance_clock-113"><span class="linenos">113</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test take action tock&quot;&quot;&quot;</span>
-</span><span id="test_advance_clock-114"><a href="#test_advance_clock-114"><span class="linenos">114</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span>
-</span><span id="test_advance_clock-115"><a href="#test_advance_clock-115"><span class="linenos">115</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
-</span><span id="test_advance_clock-116"><a href="#test_advance_clock-116"><span class="linenos">116</span></a>    <span class="k">assert</span> <span class="n">returned</span> <span class="ow">is</span> <span class="kc">None</span>
-</span><span id="test_advance_clock-117"><a href="#test_advance_clock-117"><span class="linenos">117</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
-</span><span id="test_advance_clock-118"><a href="#test_advance_clock-118"><span class="linenos">118</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
-</span><span id="test_advance_clock-119"><a href="#test_advance_clock-119"><span class="linenos">119</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="test_advance_clock-120"><a href="#test_advance_clock-120"><span class="linenos">120</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span id="test_advance_clock-121"><a href="#test_advance_clock-121"><span class="linenos">121</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
-</span><span id="test_advance_clock-122"><a href="#test_advance_clock-122"><span class="linenos">122</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">1</span>
-</span><span id="test_advance_clock-123"><a href="#test_advance_clock-123"><span class="linenos">123</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
-</span><span id="test_advance_clock-124"><a href="#test_advance_clock-124"><span class="linenos">124</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
-</span><span id="test_advance_clock-125"><a href="#test_advance_clock-125"><span class="linenos">125</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="test_advance_clock-126"><a href="#test_advance_clock-126"><span class="linenos">126</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="test_advance_clock-127"><a href="#test_advance_clock-127"><span class="linenos">127</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="test_advance_clock-85"><a href="#test_advance_clock-85"><span class="linenos">85</span></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">node</span>
+</span><span id="test_advance_clock-86"><a href="#test_advance_clock-86"><span class="linenos">86</span></a><span class="k">def</span> <span class="nf">test_advance_clock</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
+</span><span id="test_advance_clock-87"><a href="#test_advance_clock-87"><span class="linenos">87</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test take action neither tic nor tock&quot;&quot;&quot;</span>
+</span><span id="test_advance_clock-88"><a href="#test_advance_clock-88"><span class="linenos">88</span></a>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="test_advance_clock-89"><a href="#test_advance_clock-89"><span class="linenos">89</span></a>        <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">()</span>
+</span><span id="test_advance_clock-90"><a href="#test_advance_clock-90"><span class="linenos">90</span></a>    <span class="k">assert</span> <span class="s2">&quot;Time is either tic or tock&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Test take action neither tic nor tock</p>
+</div>
+
+
+                </section>
+                <section id="test_advance_clock_tic">
+                            <input id="test_advance_clock_tic-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+                    <div class="decorator decorator-pytest.mark.node">@pytest.mark.node</div>
+
+        <span class="def">def</span>
+        <span class="name">test_advance_clock_tic</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">new_node</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="test_advance_clock_tic-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#test_advance_clock_tic"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="test_advance_clock_tic-93"><a href="#test_advance_clock_tic-93"><span class="linenos"> 93</span></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">node</span>
+</span><span id="test_advance_clock_tic-94"><a href="#test_advance_clock_tic-94"><span class="linenos"> 94</span></a><span class="k">def</span> <span class="nf">test_advance_clock_tic</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
+</span><span id="test_advance_clock_tic-95"><a href="#test_advance_clock_tic-95"><span class="linenos"> 95</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test take action tic&quot;&quot;&quot;</span>
+</span><span id="test_advance_clock_tic-96"><a href="#test_advance_clock_tic-96"><span class="linenos"> 96</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="test_advance_clock_tic-97"><a href="#test_advance_clock_tic-97"><span class="linenos"> 97</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tic&quot;</span><span class="p">)</span>
+</span><span id="test_advance_clock_tic-98"><a href="#test_advance_clock_tic-98"><span class="linenos"> 98</span></a>    <span class="k">assert</span> <span class="n">returned</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tic-99"><a href="#test_advance_clock_tic-99"><span class="linenos"> 99</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+</span><span id="test_advance_clock_tic-100"><a href="#test_advance_clock_tic-100"><span class="linenos">100</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+</span><span id="test_advance_clock_tic-101"><a href="#test_advance_clock_tic-101"><span class="linenos">101</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span id="test_advance_clock_tic-102"><a href="#test_advance_clock_tic-102"><span class="linenos">102</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span>
+</span><span id="test_advance_clock_tic-103"><a href="#test_advance_clock_tic-103"><span class="linenos">103</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span>
+</span><span id="test_advance_clock_tic-104"><a href="#test_advance_clock_tic-104"><span class="linenos">104</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tic&quot;</span><span class="p">)</span>
+</span><span id="test_advance_clock_tic-105"><a href="#test_advance_clock_tic-105"><span class="linenos">105</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span>
+</span><span id="test_advance_clock_tic-106"><a href="#test_advance_clock_tic-106"><span class="linenos">106</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span>
+</span><span id="test_advance_clock_tic-107"><a href="#test_advance_clock_tic-107"><span class="linenos">107</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tic-108"><a href="#test_advance_clock_tic-108"><span class="linenos">108</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Test take action tic</p>
+</div>
+
+
+                </section>
+                <section id="test_advance_clock_tock">
+                            <input id="test_advance_clock_tock-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+                    <div class="decorator decorator-pytest.mark.node">@pytest.mark.node</div>
+
+        <span class="def">def</span>
+        <span class="name">test_advance_clock_tock</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">new_node</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="test_advance_clock_tock-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#test_advance_clock_tock"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="test_advance_clock_tock-111"><a href="#test_advance_clock_tock-111"><span class="linenos">111</span></a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">node</span>
+</span><span id="test_advance_clock_tock-112"><a href="#test_advance_clock_tock-112"><span class="linenos">112</span></a><span class="k">def</span> <span class="nf">test_advance_clock_tock</span><span class="p">(</span><span class="n">new_node</span><span class="p">):</span>
+</span><span id="test_advance_clock_tock-113"><a href="#test_advance_clock_tock-113"><span class="linenos">113</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test take action tock&quot;&quot;&quot;</span>
+</span><span id="test_advance_clock_tock-114"><a href="#test_advance_clock_tock-114"><span class="linenos">114</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="test_advance_clock_tock-115"><a href="#test_advance_clock_tock-115"><span class="linenos">115</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
+</span><span id="test_advance_clock_tock-116"><a href="#test_advance_clock_tock-116"><span class="linenos">116</span></a>    <span class="k">assert</span> <span class="n">returned</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tock-117"><a href="#test_advance_clock_tock-117"><span class="linenos">117</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tock-118"><a href="#test_advance_clock_tock-118"><span class="linenos">118</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tock-119"><a href="#test_advance_clock_tock-119"><span class="linenos">119</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="test_advance_clock_tock-120"><a href="#test_advance_clock_tock-120"><span class="linenos">120</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span id="test_advance_clock_tock-121"><a href="#test_advance_clock_tock-121"><span class="linenos">121</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
+</span><span id="test_advance_clock_tock-122"><a href="#test_advance_clock_tock-122"><span class="linenos">122</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="test_advance_clock_tock-123"><a href="#test_advance_clock_tock-123"><span class="linenos">123</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tock-124"><a href="#test_advance_clock_tock-124"><span class="linenos">124</span></a>    <span class="k">assert</span> <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span id="test_advance_clock_tock-125"><a href="#test_advance_clock_tock-125"><span class="linenos">125</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;prev&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="test_advance_clock_tock-126"><a href="#test_advance_clock_tock-126"><span class="linenos">126</span></a>    <span class="n">new_node</span><span class="o">.</span><span class="n">buffers</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="test_advance_clock_tock-127"><a href="#test_advance_clock_tock-127"><span class="linenos">127</span></a>    <span class="n">returned</span> <span class="o">=</span> <span class="n">new_node</span><span class="o">.</span><span class="n">advance_clock</span><span class="p">(</span><span class="s2">&quot;tock&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 
