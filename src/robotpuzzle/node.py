@@ -177,18 +177,34 @@ class Node:
                 return buffs
             self.activate()
             match buffs:
-                case (p, n) if p == 0:
-                    self.data = 1
-                    self.buffers.output["next"] = 0
-                case (p, n) if p == 1:
-                    self.data = 0
-                    self.buffers.output["next"] = 1
-                case (p, n) if n == 0:
-                    self.data = 1
-                    self.buffers.output["prev"] = 0
-                case (p, n) if n == 1:
-                    self.data = 0
-                    self.buffers.output["prev"] = 1
+                case (0, None):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (None, 0):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (1, None):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (None, 1):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (0, 0):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (0, 1):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (1, 0):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                case (1, 1):
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                    # self.turn_inside_out_and_explode()
+                    # self.data = "X"
+                case _:
+                    self.logger.error("Bad input buffers on activation in Node %03d", self.id)
             return buffs
         else:
             # TODO
@@ -197,35 +213,33 @@ class Node:
                 case (None, None):
                     pass
                 case (0, None):
-                    self.buffers.output["next"] = self.data
-                    self.data = 0
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (None, 0):
-                    self.buffers.output["prev"] = self.data
-                    self.data = 0
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (1, None):
-                    self.buffers.output["next"] = self.data
-                    self.data = 1
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (None, 1):
-                    self.buffers.output["prev"] = self.data
-                    self.data = 1
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (0, 0):
-                    self.buffers.output["next"] = self.data
-                    self.data = 0
-                    self.buffers.output["prev"] = self.data
-                    self.data = 0
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (0, 1):
-                    self.buffers.output["next"] = self.data
-                    self.data = 0
-                    self.buffers.output["prev"] = self.data
-                    self.data = 1
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (1, 0):
-                    self.buffers.output["next"] = self.data
-                    self.data = 1
-                    self.buffers.output["prev"] = self.data
-                    self.data = 0
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
                 case (1, 1):
-                    self.turn_inside_out_and_explode()
-                    self.data = "X"
+                    self.buffers.set_outputs(None, None)
+                    self.data = None
+                    # self.turn_inside_out_and_explode()
+                    # self.data = "X"
+                case _:
+                    self.logger.error("Bad input buffers in Node %03d", self.id)
             return buffs
 
     def advance_clock(self, time=""):
