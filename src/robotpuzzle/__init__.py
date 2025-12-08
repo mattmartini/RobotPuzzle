@@ -7,7 +7,7 @@ from rich import inspect
 from robotpuzzle import circles
 
 N = 2
-MAX_PRE_TIME = 2
+MAX_PRE_TIME = 1
 
 # The pre-time (before "Go" is pressed) should be a random number
 # For dev a value of 2 should suffice
@@ -30,7 +30,13 @@ def main() -> None:
     # Should activate a random robot.
     # (actually make a random robot head and activate it.)
     circle.head.activate()
-    circle.head.buffers.set_outputs(0, 0)
+
+    # first action taken by the activated head
+    circle.head.buffers.set_outputs(None, 1)
+    # circle.head.buffers.set_outputs(1, None)
+    # circle.head.buffers.set_outputs(1, 1)
+
+    circle.show_circle()
 
     # run the clock
     # should be a while true that runs until Boom!
