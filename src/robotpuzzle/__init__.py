@@ -1,12 +1,12 @@
 """RobotPuzzle Init"""
 
-__date__ = '2024-12-10'
+__date__ = "2024-12-10"
 __version__ = "1.4.2"
 
 from rich import inspect
 from robotpuzzle import circles
 
-N = 3
+N = 2
 MAX_PRE_TIME = 2
 
 # The pre-time (before "Go" is pressed) should be a random number
@@ -30,7 +30,7 @@ def main() -> None:
     # Should activate a random robot.
     # (actually make a random robot head and activate it.)
     circle.head.activate()
-    circle.head.data = 1
+    # circle.head.data = 1
 
     # first action taken by the activated head
     circle.head.buffers.set_outputs(None, 1)
