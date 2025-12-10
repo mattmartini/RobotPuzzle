@@ -8,16 +8,19 @@ All notable changes to this project will be documented in this file.
 
 - *(logging)* Move log statements to beginning of methods
 - *(node)* Use set_outputs method
+- *(node)* Move logic of next action into decide_action
 
 ### 🧪 Testing
 
 - *(node)* Differentiate tic from toc
+- *(node)* Additional tests for buffers
 
 ### 📚 Documentation
 
 - *(readme)* Clarification of legend
 - *(notes)* How to run the puzzle app (also via watch & run)
 - *(readme)* Fix typo
+- *(api)* Rebuild API docs
 
 ### 🎨 Styling
 
@@ -26,6 +29,7 @@ All notable changes to this project will be documented in this file.
 ### 🚧 Build
 
 - *(cliff)* Fix error in default cliff.toml
+- *(packages)* Update python and package versions to latest
 
 ### Other
 
