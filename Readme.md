@@ -10,7 +10,7 @@ controller. It also seemed like a fun problem to solve.
 
 ## The Problem
 [Origin of Puzzle](http://www.cs.ucr.edu/~neal/puzzles)  
-2^N (that's two raised to the power of N, where N can be arbitrarily
+$2^N$ (that's two raised to the power of N, where N can be arbitrarily
 large) robots are arranged shoulder to shoulder facing outwards in a
 circle. Each robot has limited memory - it can only remember O(1) bits
 of information, and can give or receive information only to the robot to
@@ -77,6 +77,8 @@ This project creates a simulator for the robot puzzle to test out
 algorithms for the puzzle's solution. There are classes for the robots
 (nodes) and the circle of robots (Circular Doubly Linked List).
 
+All classes have `__repr__` and `__str__` methods to help visualize their state.
+
 Each unit of time takes two discrete parts a `tic` and a `tock`. During the
 `tic` phase all of the robots send a 0 or 1 (or nothing) to one or both of
 its neighbors. Then on the `tock` it receives what its neighbors sent it
@@ -87,6 +89,7 @@ that can be changed once each clock cycle.
 Each robot (node) has an `id`, pointer to its `prev`ious and `next`
 neighbor, an `active` flag, a (O)1 bid `data` register, and `buffers`
 for incoming and outgoing data.
+
 
 ### Legend
 To help visualize what is going on with the robots, each robot is represented by a panel as follows.
@@ -101,9 +104,42 @@ In the first line are shown:
  `prev_node_number   active   node_number    active   next_node_number`  
 the following line shows:  `prev_out_buf  <-- prev_in_buf   data  next_in_buf --> next_out_buf`
 
+active is '-' for when the robot is inactive, '+' when it is active.
 
-## Solution
-Given that there are always 2^N Robots, we will always have a starting
+For example, with N=2 there are 4 robots:
+```
+╭───────────────────╮ ╭───────────────────╮ ╭───────────────────╮ ╭───────────────────╮
+│ 003  - 000 -  001 │ │ 000  - 001 -  002 │ │ 001  - 002 -  003 │ │ 002  - 003 -  000 │
+│ _<-- _  _  _ -->_ │ │ _<-- _  _  _ -->_ │ │ _<-- _  _  _ -->_ │ │ _<-- _  _  _ -->_ │
+╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯
+```
+All of them are inactive, with nothing in their data register or buffers.
+
+At some time, `t`, robot `002` is activated; let's say that the protocol says
+upon activation, send 1 to your next neighbor and set your data register to 0.
+
+Then at `t+1` during the `tic` phase the robots would look like:
+
+```
+╭───────────────────╮ ╭───────────────────╮ ╭───────────────────╮ ╭───────────────────╮
+│ 003  - 000 -  001 │ │ 000  - 001 -  002 │ │ 001  + 002 +  003 │ │ 002  - 003 -  000 │
+│ _<-- _  _  _ -->_ │ │ _<-- _  _  _ -->_ │ │ _<-- _  0  _ -->1 │ │ _<-- _  _  _ -->_ │
+╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯
+```
+during the `tock` phase the robots would look like:
+
+```
+╭───────────────────╮ ╭───────────────────╮ ╭───────────────────╮ ╭───────────────────╮
+│ 003  - 000 -  001 │ │ 000  - 001 -  002 │ │ 001  + 002 +  003 │ │ 002  - 003 -  000 │
+│ _<-- _  _  _ -->_ │ │ _<-- _  _  _ -->_ │ │ _<-- _  0  _ -->_ │ │ _<-- 1  _  _ -->_ │
+╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯ ╰───────────────────╯
+```
+At `t+2` robot `003` would see data on it's `prev` input buffer, activate, and put a 1 in it's `next` output buffer (node `000` since they are in a circle).
+
+And so on.
+
+## Looking toward a Solution
+Given that there are always $2^N$ Robots, we will always have a starting
 robot (head) and its mirror (tail) that is halfway around the circle.
 
 There are two obvious ways of starting (to my mind): 
@@ -129,6 +165,12 @@ bit there are actually three possibilities of what it can send its
 neighbor on each clock cycle: 0, 1, or Null (None).
 
 ### Details
+
+This project uses `uv`  To run the simulation: `uv run puzzle`
+
+## Documentation
+Information on each of the classes, methods, and tests can be found in the `docs` directory (and the source code).
+
 
 ### versions
 
