@@ -10,7 +10,7 @@ controller. It also seemed like a fun problem to solve.
 
 ## The Problem
 [Origin of Puzzle](http://www.cs.ucr.edu/~neal/puzzles)  
-2^N$ (that's two raised to the power of N, where N can be arbitrarily
+2^N (that's two raised to the power of N, where N can be arbitrarily
 large) robots are arranged shoulder to shoulder facing outwards in a
 circle. Each robot has limited memory - it can only remember O(1) bits
 of information, and can give or receive information only to the robot to
