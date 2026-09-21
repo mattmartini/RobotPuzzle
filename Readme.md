@@ -170,7 +170,11 @@ in the `decide_activation_action` and `decide_action` methods.
 
 ### Running the Simulator
 
-This project uses `uv`  To run the simulation: `uv run puzzle`
+This project uses `uv`  
+
+To activate the virtual environment: `source .venv/bin/activate`
+
+To run the simulation: `uv run puzzle`
 
 ## Documentation
 Information on each of the classes, methods, and tests can be found in the `docs` directory (and the source code).
