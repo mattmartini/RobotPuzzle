@@ -12,12 +12,12 @@ controller. It also seemed like a fun problem to solve.
 [Origin of Puzzle](http://www.cs.ucr.edu/~neal/puzzles)  
 $2^N$ (that's two raised to the power of N, where N can be arbitrarily
 large) robots are arranged shoulder to shoulder facing outwards in a
-circle. Each robot has limited memory - it can only remember O(1) bits
+circle. Each robot has limited memory - it can only remember `O(1)` bits
 of information, and can give or receive information only to the robot to
 its left and the robot to its right. Time proceeds in discrete rounds.
-In each round, each robot can communicate O(1) bits of information with
+In each round, each robot can communicate `O(1)` bits of information with
 the two robots to its right and left. Specifically, in each round, each
-robot sends O(1) bits to each of his neighboring robots, and then
+robot sends `O(1)` bits to each of his neighboring robots, and then
 receives whatever bits those robots sent him or her. No robot knows in
 advance how many robots there are in the circle.
 
@@ -39,9 +39,9 @@ outlined above.
 ### example sol'n (non-working)
 An example that doesn't quite work would be:
 
-  (1) The first robot (the one that the person touches at time t), at
-      time t+1 sends the message "1" to the robot to its right. At time
-      t+2, that robot in turn sends the same message to the robot to its
+  (1) The first robot (the one that the person touches at time `t`), at
+      time `t+1` sends the message "1" to the robot to its right. At time
+      `t+2`, that robot in turn sends the same message to the robot to its
       right, and so on. In general, each robot follows the protocol "if
       I receive message "1" from the left, then in the next round, I
       send the message "1" to my right."
@@ -62,14 +62,14 @@ An example that doesn't quite work would be:
 
 That's an example protocol, and it would allow the robots to self-
 destruct simultaneously. But it doesn't fit the criteria outlined for
-two reasons. First, it requires each robot to communicate more than O(1)
+two reasons. First, it requires each robot to communicate more than `O(1)`
 bits of information in some rounds. (To communicate a number as large as
 $2^N$ requires N bits, and N can be arbitrarily large.) Second, it
 requires each robot (when counting down) to remember up to N bits of
 information.
 
 The protocol you design must require each robot to remember, and to
-communicate, only O(1) bits of information at any given time, no matter
+communicate, only `O(1)` bits of information at any given time, no matter
 how large N is!
 
 ## Simulation
@@ -87,7 +87,7 @@ that can be changed once each clock cycle.
 
 ### Robots
 Each robot (node) has an `id`, pointer to its `prev`ious and `next`
-neighbor, an `active` flag, a (O)1 bid `data` register, and `buffers`
+neighbor, an `active` flag, a `O(1)` bit `data` register, and `buffers`
 for incoming and outgoing data.
 
 
@@ -104,7 +104,7 @@ In the first line are shown:
  `prev_node_number   active   node_number    active   next_node_number`  
 the following line shows:  `prev_out_buf  <-- prev_in_buf   data  next_in_buf --> next_out_buf`
 
-active is '-' for when the robot is inactive, '+' when it is active.
+active is `-` for when the robot is inactive, `+` when it is active.
 
 For example, with N=2 there are 4 robots:
 ```
@@ -164,13 +164,19 @@ It is interesting to note that while each robot can only remember (O)1
 bit there are actually three possibilities of what it can send its
 neighbor on each clock cycle: 0, 1, or Null (None).
 
-### Details
+The simulator is complete, but the algorithm for the protocol that will 
+provide a solution must be devised and programmed into the robots (`node.py`)
+in the `decide_activation_action` and `decide_action` methods.
+
+### Running the Simulator
 
 This project uses `uv`  To run the simulation: `uv run puzzle`
 
 ## Documentation
 Information on each of the classes, methods, and tests can be found in the `docs` directory (and the source code).
 
+### Logs
+There is an `app.log` file in the `logs` dir.
 
 ### versions
 
